@@ -1,9 +1,2 @@
-export {
-  MarshMellow,
-  MarshMellowWelcome,
-  MarshMellowLoading,
-  MarshMellowOffline,
-  MarshMellowError,
-  MarshMellowEmpty,
-  MarshMellowCelebration,
-} from './MarshMellow';
+export { ASALogo, ASALogoCompact } from './ASALogo';
+export * from './Icons';

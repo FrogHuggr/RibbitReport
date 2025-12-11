@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppShell } from './components/layout';
-import { Home, Dispatches, MythBusters, WorldMap, Passport } from './pages';
+import { Home, Dispatches, MythBusters, WorldMap, Passport, Settings, Help } from './pages';
 
 function App() {
   return (
@@ -22,6 +22,10 @@ function App() {
 
           {/* My Passport */}
           <Route path="passport" element={<Passport />} />
+
+          {/* Settings & Help */}
+          <Route path="settings" element={<Settings />} />
+          <Route path="help" element={<Help />} />
 
           {/* 404 fallback - redirect to home */}
           <Route path="*" element={<Home />} />

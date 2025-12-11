@@ -1,232 +1,369 @@
 import { Link } from 'react-router-dom';
 import { useStamps, useProgress } from '../hooks';
+import { ASALogo, IconChevronRight, IconGlobe, IconMail, IconLightbulb, IconAward, IconStatusDot, IconCalendar, IconSettings } from '../components/ui';
 
 // Sample Amphibian of the Day data - will rotate through your 9 species
 const AMPHIBIAN_OF_THE_DAY = {
   id: 'purple-frog',
   name: 'Purple Frog',
   scientificName: 'Nasikabatrachus sahyadrensis',
-  emoji: '🟣',
   status: 'EN',
+  statusLabel: 'Endangered',
   country: 'India',
-  countryFlag: '🇮🇳',
-  funFact: "I spend most of my life underground and only come up for about two weeks each year to find love!",
+  region: 'Western Ghats',
+  funFact: "This extraordinary species spends most of its life underground, emerging for only about two weeks each year during monsoon season to breed.",
   image: '/images/species/purple-frog.jpg',
   dispatchId: 'karina-purple-frog',
 };
 
-// MarshMellow greetings that rotate
-const GREETINGS = [
-  "Hey there, explorer!",
-  "Ribbit ribbit! Welcome back!",
-  "Ready to discover something amazing?",
-  "Hop on in, friend!",
-  "Great to see you!",
-];
+// Mini compass rose SVG
+function CompassRose({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 40 40" className={className} fill="none">
+      <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+      <circle cx="20" cy="20" r="12" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
+      {/* N S E W points */}
+      <path d="M20 2 L22 10 L20 8 L18 10 Z" fill="currentColor" opacity="0.8" />
+      <path d="M20 38 L18 30 L20 32 L22 30 Z" fill="currentColor" opacity="0.4" />
+      <path d="M38 20 L30 18 L32 20 L30 22 Z" fill="currentColor" opacity="0.4" />
+      <path d="M2 20 L10 22 L8 20 L10 18 Z" fill="currentColor" opacity="0.4" />
+      {/* Center dot */}
+      <circle cx="20" cy="20" r="2" fill="currentColor" opacity="0.6" />
+    </svg>
+  );
+}
 
 export function Home() {
   const { totalStamps } = useStamps();
   const { progress } = useProgress();
   const completedArticles = progress.filter(p => p.completed).length;
 
-  // Get a greeting based on time of day
-  const hour = new Date().getHours();
-  const timeGreeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
-
-  // Pick a random greeting (in real app, could be based on date)
-  const randomGreeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+  const today = new Date();
+  const dateString = today.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  });
 
   return (
-    <div className="min-h-screen pb-24">
-      {/* Header */}
-      <header className="bg-gradient-to-br from-asa-green via-asa-green to-asa-green-dark pt-safe-top">
-        <div className="px-5 pt-6 pb-8">
-          {/* MarshMellow greeting */}
-          <div className="flex items-start gap-4">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-lg animate-bounce-in">
-              🐸
-            </div>
-            <div className="flex-1 text-white pt-1">
-              <p className="text-asa-yellow font-fun font-semibold text-sm">{timeGreeting}!</p>
-              <h1 className="text-2xl font-display mt-1">{randomGreeting}</h1>
-            </div>
-          </div>
-
-          {/* Quick stats */}
-          <div className="flex gap-3 mt-6">
-            <Link
-              to="/passport"
-              className="flex-1 bg-white/15 backdrop-blur-sm rounded-2xl p-4 text-white hover:bg-white/20 transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">🏆</span>
-                <div>
-                  <p className="text-2xl font-bold">{totalStamps}</p>
-                  <p className="text-xs opacity-80">Stamps</p>
-                </div>
-              </div>
-            </Link>
-            <Link
-              to="/dispatches"
-              className="flex-1 bg-white/15 backdrop-blur-sm rounded-2xl p-4 text-white hover:bg-white/20 transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">📚</span>
-                <div>
-                  <p className="text-2xl font-bold">{completedArticles}</p>
-                  <p className="text-xs opacity-80">Stories Read</p>
-                </div>
-              </div>
-            </Link>
-          </div>
+    <div className="min-h-screen pb-24" style={{
+      background: 'linear-gradient(180deg, #2C1810 0%, #3D2317 15%, #F5F0E6 15%, #F5F0E6 100%)',
+    }}>
+      {/* Hero Header - Explorer's Headquarters */}
+      <header className="relative overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #2C1810 0%, #3D2317 50%, #2C1810 100%)',
+      }}>
+        {/* Subtle topographic pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="topo" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M0 50 Q25 30, 50 50 T100 50" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M0 70 Q25 50, 50 70 T100 70" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M0 30 Q25 10, 50 30 T100 30" stroke="white" fill="none" strokeWidth="0.5"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#topo)"/>
+          </svg>
         </div>
 
-        {/* Curved bottom */}
-        <div className="h-6 bg-cream rounded-t-[2rem]" />
+        {/* Decorative compass in corner */}
+        <div className="absolute top-8 right-4 text-amber-600/20">
+          <CompassRose className="w-16 h-16" />
+        </div>
+
+        <div className="relative px-5 pt-12 pb-8">
+          {/* Logo and settings */}
+          <div className="flex items-center justify-between mb-6">
+            {/* ASA Badge */}
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-full flex items-center justify-center" style={{
+                background: 'radial-gradient(circle at 30% 30%, #C41E3A 0%, #8B0000 100%)',
+                boxShadow: '0 3px 10px rgba(0,0,0,0.5), inset 0 1px 5px rgba(255,255,255,0.2)',
+              }}>
+                <ASALogo variant="icon" className="w-6 h-6" color="white" />
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-amber-400/40 text-[10px] tracking-[0.15em] uppercase">Amphibian Survival Alliance</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 text-amber-200/50 text-xs px-3 py-1.5 rounded-full" style={{
+                background: 'rgba(255,255,255,0.05)',
+              }}>
+                <IconCalendar size={14} />
+                <span>{dateString}</span>
+              </div>
+              <Link
+                to="/settings"
+                className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-amber-200/50 hover:text-amber-200 transition-colors"
+              >
+                <IconSettings size={18} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Title with expedition styling */}
+          <div className="text-center mb-6">
+            <p className="text-amber-400/50 text-xs tracking-[0.2em] uppercase mb-2">Welcome to</p>
+            <h1 className="text-3xl text-amber-100 tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
+              The Ribbit Report
+            </h1>
+            <p className="text-amber-200/40 mt-2 text-sm italic">
+              Your gateway to the world of amphibians
+            </p>
+          </div>
+
+          {/* Stats bar - Expedition metrics */}
+          <div className="flex justify-center">
+            <div className="inline-flex gap-1 p-1 rounded-lg" style={{
+              background: 'rgba(0,0,0,0.3)',
+            }}>
+              <Link to="/dispatches" className="group px-5 py-3 rounded-md hover:bg-white/5 transition-colors text-center">
+                <p className="text-2xl font-bold text-amber-100" style={{ fontFamily: 'Georgia, serif' }}>{completedArticles}</p>
+                <p className="text-[10px] text-amber-200/40 uppercase tracking-wider group-hover:text-amber-200/60 transition-colors">Dispatches</p>
+              </Link>
+              <div className="w-px bg-amber-200/10 my-2" />
+              <Link to="/passport" className="group px-5 py-3 rounded-md hover:bg-white/5 transition-colors text-center">
+                <p className="text-2xl font-bold text-amber-100" style={{ fontFamily: 'Georgia, serif' }}>{totalStamps}</p>
+                <p className="text-[10px] text-amber-200/40 uppercase tracking-wider group-hover:text-amber-200/60 transition-colors">Stamps</p>
+              </Link>
+              <div className="w-px bg-amber-200/10 my-2" />
+              <Link to="/map" className="group px-5 py-3 rounded-md hover:bg-white/5 transition-colors text-center">
+                <p className="text-2xl font-bold text-amber-100" style={{ fontFamily: 'Georgia, serif' }}>9</p>
+                <p className="text-[10px] text-amber-200/40 uppercase tracking-wider group-hover:text-amber-200/60 transition-colors">Countries</p>
+              </Link>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Main content */}
-      <main className="px-5 -mt-1 bg-cream">
-        {/* Amphibian of the Day */}
+      <main className="px-5 py-6">
+        {/* Featured: Species of the Day - Field Sketch Card style */}
         <section className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-display text-ink">
-              <span className="text-asa-yellow">✨</span> Amphibian of the Day
-            </h2>
-            <span className="text-xs text-asa-grey-light font-medium bg-paper px-3 py-1 rounded-full">
-              {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            </span>
+            <div>
+              <p className="text-xs font-semibold text-asa-green uppercase tracking-wider">Today's Discovery</p>
+              <h2 className="text-lg text-stone-800" style={{ fontFamily: 'Georgia, serif' }}>Species of the Day</h2>
+            </div>
           </div>
 
           <Link
             to={`/dispatches/${AMPHIBIAN_OF_THE_DAY.dispatchId}`}
-            className="block bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover transition-all hover:-translate-y-1"
+            className="block overflow-hidden transition-all group hover:-translate-y-1"
           >
-            {/* Image placeholder */}
-            <div className="h-48 bg-gradient-to-br from-asa-blue-light to-asa-blue flex items-center justify-center">
-              <span className="text-8xl">{AMPHIBIAN_OF_THE_DAY.emoji}</span>
-            </div>
+            {/* Field sketch card */}
+            <div className="rounded-xl overflow-hidden shadow-xl" style={{
+              background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 50%, #F5F0E6 100%)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15), inset 0 0 40px rgba(139, 90, 43, 0.05)',
+            }}>
+              {/* Top edge - aged paper effect */}
+              <div className="h-1" style={{
+                background: 'linear-gradient(90deg, #D4B896 0%, #C4A882 50%, #D4B896 100%)',
+              }} />
 
-            <div className="p-5">
-              {/* Badges */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="country-badge">
-                  {AMPHIBIAN_OF_THE_DAY.countryFlag} {AMPHIBIAN_OF_THE_DAY.country}
-                </span>
-                <span className={`status-badge status-badge--${AMPHIBIAN_OF_THE_DAY.status.toLowerCase()}`}>
-                  {AMPHIBIAN_OF_THE_DAY.status === 'EN' ? '⚠️ Endangered' : AMPHIBIAN_OF_THE_DAY.status}
-                </span>
+              {/* Image area styled as field sketch */}
+              <div className="relative h-52" style={{
+                background: 'linear-gradient(135deg, #97B3CA 0%, #7A9BB5 100%)',
+              }}>
+                {/* Sketch placeholder */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <ASALogo variant="icon" className="w-20 h-20 mx-auto text-white/20" />
+                    <p className="text-white/30 text-xs mt-2 italic" style={{ fontFamily: 'Georgia, serif' }}>
+                      Field illustration pending
+                    </p>
+                  </div>
+                </div>
+
+                {/* Status badge - specimen tag style */}
+                <div className="absolute top-4 left-4">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded" style={{
+                    background: 'rgba(255,254,247,0.95)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  }}>
+                    <IconStatusDot status={AMPHIBIAN_OF_THE_DAY.status} />
+                    <span className="text-xs font-semibold text-stone-700">{AMPHIBIAN_OF_THE_DAY.statusLabel}</span>
+                  </div>
+                </div>
+
+                {/* Location tag */}
+                <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded" style={{
+                  background: 'rgba(44,24,16,0.8)',
+                }}>
+                  <p className="text-amber-100 text-sm font-medium">
+                    {AMPHIBIAN_OF_THE_DAY.region}, {AMPHIBIAN_OF_THE_DAY.country}
+                  </p>
+                </div>
               </div>
 
-              {/* Name */}
-              <h3 className="text-2xl font-display text-ink">
-                {AMPHIBIAN_OF_THE_DAY.name}
-              </h3>
-              <p className="text-sm text-asa-grey-light italic">
-                {AMPHIBIAN_OF_THE_DAY.scientificName}
-              </p>
+              {/* Content area - naturalist's notes */}
+              <div className="p-5">
+                {/* Specimen header */}
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h3 className="text-xl text-stone-800 group-hover:text-asa-green transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
+                      {AMPHIBIAN_OF_THE_DAY.name}
+                    </h3>
+                    <p className="text-sm text-stone-500 italic">
+                      {AMPHIBIAN_OF_THE_DAY.scientificName}
+                    </p>
+                  </div>
+                  {/* Stamp corner */}
+                  <div className="w-12 h-12 rounded border-2 border-dashed border-stone-300 flex items-center justify-center">
+                    <span className="text-[8px] text-stone-400 text-center leading-tight">STAMP<br/>HERE</span>
+                  </div>
+                </div>
 
-              {/* Fun fact */}
-              <div className="mt-4 p-4 bg-asa-yellow/10 rounded-2xl border-l-4 border-asa-yellow">
-                <p className="text-sm text-asa-grey font-medium flex items-start gap-2">
-                  <span className="text-lg">💬</span>
-                  "{AMPHIBIAN_OF_THE_DAY.funFact}"
-                </p>
-              </div>
+                {/* Notes section */}
+                <div className="border-t border-stone-200 pt-3 mt-3">
+                  <p className="text-[10px] text-stone-400 uppercase tracking-wider mb-1">Field Notes</p>
+                  <p className="text-sm text-stone-600 leading-relaxed line-clamp-3" style={{ fontFamily: 'Georgia, serif' }}>
+                    "{AMPHIBIAN_OF_THE_DAY.funFact}"
+                  </p>
+                </div>
 
-              {/* CTA */}
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-asa-green font-semibold text-sm">Learn more about me!</span>
-                <div className="w-10 h-10 bg-asa-green rounded-full flex items-center justify-center text-white">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
+                {/* Footer */}
+                <div className="mt-4 flex items-center justify-between pt-3 border-t border-stone-200">
+                  <span className="text-sm font-semibold text-asa-green" style={{ fontFamily: 'Courier, monospace' }}>
+                    READ FULL DISPATCH
+                  </span>
+                  <div className="w-8 h-8 bg-asa-green/10 rounded-full flex items-center justify-center text-asa-green group-hover:bg-asa-green group-hover:text-white transition-colors">
+                    <IconChevronRight size={18} />
+                  </div>
                 </div>
               </div>
             </div>
           </Link>
         </section>
 
-        {/* Quick Actions */}
+        {/* Explore Sections - Expedition menu */}
         <section className="mb-8">
-          <h2 className="text-xl font-display text-ink mb-4">Explore</h2>
+          <h2 className="text-lg text-stone-800 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Begin Your Expedition</h2>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-3">
+            {/* Field Dispatches */}
             <Link
               to="/dispatches"
-              className="fun-card p-5 flex flex-col items-center text-center"
+              className="flex items-center gap-4 p-4 rounded-xl transition-all group hover:-translate-y-0.5"
+              style={{
+                background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 100%)',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+              }}
             >
-              <div className="w-14 h-14 bg-asa-green/10 rounded-2xl flex items-center justify-center mb-3">
-                <span className="text-3xl">📬</span>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #7AC143 0%, #5A9A2F 100%)',
+              }}>
+                <IconMail size={22} className="text-white" />
               </div>
-              <h3 className="font-bold text-ink">Field Dispatches</h3>
-              <p className="text-xs text-asa-grey-light mt-1">Stories from researchers</p>
+              <div className="flex-1">
+                <h3 className="font-semibold text-stone-800 group-hover:text-asa-green transition-colors">Field Dispatches</h3>
+                <p className="text-sm text-stone-500">Letters from researchers worldwide</p>
+              </div>
+              <IconChevronRight className="text-stone-400 group-hover:text-asa-green transition-colors" size={20} />
             </Link>
 
+            {/* Explorer's Map */}
             <Link
               to="/map"
-              className="fun-card p-5 flex flex-col items-center text-center"
+              className="flex items-center gap-4 p-4 rounded-xl transition-all group hover:-translate-y-0.5"
+              style={{
+                background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 100%)',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+              }}
             >
-              <div className="w-14 h-14 bg-asa-blue/20 rounded-2xl flex items-center justify-center mb-3">
-                <span className="text-3xl">🗺️</span>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #97B3CA 0%, #7A9BB5 100%)',
+              }}>
+                <IconGlobe size={22} className="text-white" />
               </div>
-              <h3 className="font-bold text-ink">World Map</h3>
-              <p className="text-xs text-asa-grey-light mt-1">Explore by location</p>
+              <div className="flex-1">
+                <h3 className="font-semibold text-stone-800 group-hover:text-asa-green transition-colors">Explorer's Map</h3>
+                <p className="text-sm text-stone-500">Chart your discoveries by region</p>
+              </div>
+              <IconChevronRight className="text-stone-400 group-hover:text-asa-green transition-colors" size={20} />
             </Link>
 
+            {/* Myth Busters */}
             <Link
               to="/myths"
-              className="fun-card p-5 flex flex-col items-center text-center"
+              className="flex items-center gap-4 p-4 rounded-xl transition-all group hover:-translate-y-0.5"
+              style={{
+                background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 100%)',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+              }}
             >
-              <div className="w-14 h-14 bg-asa-yellow/20 rounded-2xl flex items-center justify-center mb-3">
-                <span className="text-3xl">🤔</span>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #FFD100 0%, #E5BC00 100%)',
+              }}>
+                <IconLightbulb size={22} className="text-white" />
               </div>
-              <h3 className="font-bold text-ink">Myth Busters</h3>
-              <p className="text-xs text-asa-grey-light mt-1">Fact or fiction?</p>
+              <div className="flex-1">
+                <h3 className="font-semibold text-stone-800 group-hover:text-asa-green transition-colors">Myth Busters</h3>
+                <p className="text-sm text-stone-500">Separate fact from fiction</p>
+              </div>
+              <IconChevronRight className="text-stone-400 group-hover:text-asa-green transition-colors" size={20} />
             </Link>
 
+            {/* My Passport */}
             <Link
               to="/passport"
-              className="fun-card p-5 flex flex-col items-center text-center"
+              className="flex items-center gap-4 p-4 rounded-xl transition-all group hover:-translate-y-0.5"
+              style={{
+                background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 100%)',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+              }}
             >
-              <div className="w-14 h-14 bg-status-en/10 rounded-2xl flex items-center justify-center mb-3">
-                <span className="text-3xl">🛂</span>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #C41E3A 0%, #8B0000 100%)',
+              }}>
+                <IconAward size={22} className="text-white" />
               </div>
-              <h3 className="font-bold text-ink">My Passport</h3>
-              <p className="text-xs text-asa-grey-light mt-1">Stamps & achievements</p>
+              <div className="flex-1">
+                <h3 className="font-semibold text-stone-800 group-hover:text-asa-green transition-colors">My Passport</h3>
+                <p className="text-sm text-stone-500">Collect stamps & track achievements</p>
+              </div>
+              <IconChevronRight className="text-stone-400 group-hover:text-asa-green transition-colors" size={20} />
             </Link>
           </div>
         </section>
 
-        {/* Did You Know? */}
+        {/* Did You Know - Explorer's journal note */}
         <section className="mb-8">
-          <div className="bg-gradient-to-br from-asa-green to-asa-green-dark rounded-3xl p-6 text-white">
-            <div className="flex items-start gap-4">
-              <span className="text-4xl">🤯</span>
-              <div>
-                <h3 className="font-display text-lg">Did You Know?</h3>
-                <p className="text-sm opacity-90 mt-2 leading-relaxed">
-                  There are over <span className="font-bold text-asa-yellow">8,000 species</span> of amphibians in the world, and nearly <span className="font-bold text-asa-yellow">half of them</span> are threatened with extinction!
-                </p>
-                <Link
-                  to="/myths"
-                  className="inline-flex items-center gap-2 mt-4 bg-white text-asa-green px-4 py-2 rounded-full text-sm font-bold hover:bg-asa-yellow transition-colors"
-                >
-                  Learn More
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
+          <div className="rounded-xl p-6 relative overflow-hidden" style={{
+            background: 'linear-gradient(135deg, #2C1810 0%, #3D2317 100%)',
+          }}>
+            {/* Corner compass decoration */}
+            <div className="absolute top-4 right-4 text-amber-600/10">
+              <CompassRose className="w-20 h-20" />
+            </div>
+
+            <div className="relative">
+              <p className="text-amber-400/60 text-xs tracking-[0.15em] uppercase mb-3">Did You Know</p>
+              <p className="text-amber-100 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
+                There are over <span className="font-bold text-asa-yellow">8,000 species</span> of amphibians
+                discovered so far, and scientists estimate there may be thousands more waiting to be found.
+                Sadly, nearly <span className="font-bold text-asa-yellow">41%</span> are threatened with extinction.
+              </p>
+              <Link
+                to="/myths"
+                className="inline-flex items-center gap-2 mt-4 text-amber-200/60 hover:text-amber-200 text-sm font-medium transition-colors"
+              >
+                Learn more about conservation
+                <IconChevronRight size={16} />
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* Footer attribution */}
-        <footer className="text-center pb-8">
-          <p className="text-xs text-asa-grey-light">
-            Made with 💚 by the <span className="font-semibold">Amphibian Survival Alliance</span>
-          </p>
+        {/* Footer */}
+        <footer className="pt-6 border-t border-stone-200">
+          <div className="flex flex-col items-center gap-3">
+            <ASALogo variant="full" className="w-32" color="grey" />
+            <p className="text-xs text-stone-400">
+              Powered by the Amphibian Survival Alliance
+            </p>
+          </div>
         </footer>
       </main>
     </div>
