@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useStamps, useProgress } from '../hooks';
 import { ASALogo, IconChevronRight, IconGlobe, IconMail, IconLightbulb, IconAward, IconStatusDot, IconCalendar, IconSettings } from '../components/ui';
+import { MarshMellow } from '../components/MarshMellow';
 
 // Sample Amphibian of the Day data - will rotate through your 9 species
 const AMPHIBIAN_OF_THE_DAY = {
@@ -102,15 +103,28 @@ export function Home() {
             </div>
           </div>
 
-          {/* Title with expedition styling */}
-          <div className="text-center mb-6">
-            <p className="text-amber-400/50 text-xs tracking-[0.2em] uppercase mb-2">Welcome to</p>
-            <h1 className="text-3xl text-amber-100 tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
-              The Ribbit Report
-            </h1>
-            <p className="text-amber-200/40 mt-2 text-sm italic">
-              Your gateway to the world of amphibians
-            </p>
+          {/* Title with MarshMellow */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+            {/* MarshMellow mascot */}
+            <div className="relative">
+              <MarshMellow
+                pose="explorer"
+                size="lg"
+                className="drop-shadow-2xl"
+                alt="MarshMellow the explorer frog welcomes you"
+              />
+            </div>
+
+            {/* Title text */}
+            <div className="text-center sm:text-left">
+              <p className="text-amber-400/50 text-xs tracking-[0.2em] uppercase mb-1">Welcome to</p>
+              <h1 className="text-3xl sm:text-4xl text-amber-100 tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
+                The Ribbit Report
+              </h1>
+              <p className="text-amber-200/40 mt-2 text-sm italic">
+                Your gateway to the world of amphibians
+              </p>
+            </div>
           </div>
 
           {/* Stats bar - Expedition metrics */}
