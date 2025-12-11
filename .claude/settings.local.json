@@ -7,7 +7,13 @@
       "Bash(npx tsc --noEmit)",
       "Bash(git init:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nMVP rebuild: Ribbit Report app with 5 main sections\n\n- Home/Today with Amphibian of the Day\n- Field Dispatches listing (9 researcher stories)\n- Myth Busters with flip-card interaction\n- Explorer''s Map with world pins\n- My Passport with stamps & achievements\n\nFeatures:\n- ASA brand colors (#7AC143 green, #97B3CA blue, #FFD100 yellow)\n- Fun typography (Lilita One, Nunito, Fredoka)\n- Progress tracking & gamification\n- Offline support hooks\n- PWA configuration\n- i18n ready\n\n🐸 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(gh auth status:*)",
+      "Bash(git config:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdventure theme transformation: Explorer''s Field Journal design\n\n- Dispatches: Airmail envelope cards with perforated postage stamps\n- Home: Explorer''s headquarters with compass rose, field sketch card\n- WorldMap: Indiana Jones parchment map with travel paths & X marks\n- Passport: Vintage leather journal with wax seals & serrated stamps\n- MythBusters: Icon-based myth/truth indicators (removed emojis)\n- New Settings & Help pages with ASA branding\n- Custom SVG icon library replacing all emojis\n- Cohesive adventure aesthetic: leather, parchment, gold accents\n\n🐸 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

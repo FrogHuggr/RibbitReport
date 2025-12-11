@@ -1,44 +1,123 @@
-/* Design Tokens for The Ribbit Report - ASA Brand Colors */
+/* Design Tokens for The Ribbit Report
+   Theme: National Geographic meets Vintage Field Journal
+   Accessibility: WCAG 2.1 AA compliant contrast ratios */
 
 :root {
-  /* ASA Brand Colors */
+  /* ═══════════════════════════════════════════════════════════════
+     ASA BRAND COLORS (Primary)
+     ═══════════════════════════════════════════════════════════════ */
   --color-asa-green: #7AC143;
   --color-asa-green-dark: #5A9A2F;
+  --color-asa-green-light: #9ED36B;
   --color-asa-blue: #97B3CA;
   --color-asa-blue-light: #C5D6E5;
+  --color-asa-blue-dark: #6A8FAB;
   --color-asa-yellow: #FFD100;
   --color-asa-yellow-light: #FFF0A0;
+  --color-asa-yellow-dark: #D4AF00;
   --color-asa-grey: #455560;
   --color-asa-grey-light: #808080;
 
-  /* UI Colors */
+  /* ═══════════════════════════════════════════════════════════════
+     ADVENTURE PALETTE (Explorer's Field Journal)
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Leather & Wood */
+  --color-leather-dark: #2C1810;
+  --color-leather: #3D2317;
+  --color-leather-light: #5D3A2A;
+  --color-mahogany: #4A2C2A;
+  --color-walnut: #5C4033;
+
+  /* Parchment & Paper */
+  --color-parchment: #F5F0E6;
+  --color-parchment-light: #FFFEF7;
+  --color-parchment-dark: #E8DCC8;
+  --color-aged-paper: #FBF8F1;
+  --color-manila: #F2E2C4;
+
+  /* Gold & Brass (accents) */
+  --color-gold: #D4AF37;
+  --color-gold-light: #F4D03F;
+  --color-gold-dark: #B8860B;
+  --color-brass: #B5A642;
+  --color-bronze: #CD7F32;
+
+  /* Amber & Sepia */
+  --color-amber: #FFBF00;
+  --color-amber-light: #FEF3C7;
+  --color-amber-dark: #D97706;
+  --color-sepia: #704214;
+  --color-sepia-light: #8B6914;
+
+  /* Ink & Writing */
+  --color-ink-black: #1A1A1A;
+  --color-ink-brown: #3D2914;
+  --color-ink-blue: #1E3A5F;
+  --color-ink-faded: #6B5B4D;
+
+  /* Wax Seal Red */
+  --color-wax-red: #C41E3A;
+  --color-wax-red-dark: #8B0000;
+  --color-wax-red-light: #DC3545;
+
+  /* ═══════════════════════════════════════════════════════════════
+     UI COLORS
+     ═══════════════════════════════════════════════════════════════ */
   --color-cream: #FFFDF8;
   --color-paper: #F7F4EE;
   --color-white: #FFFFFF;
   --color-ink: #2D3436;
 
-  /* IUCN Status colors - vibrant for kids */
-  --color-status-lc: #27AE60;
-  --color-status-nt: #F1C40F;
-  --color-status-vu: #F39C12;
-  --color-status-en: #E74C3C;
-  --color-status-cr: #C0392B;
-  --color-status-ew: #8E44AD;
-  --color-status-ex: #2C3E50;
-  --color-status-dd: #95A5A6;
+  /* Stone grays (for text on light backgrounds) */
+  --color-stone-50: #FAFAF9;
+  --color-stone-100: #F5F5F4;
+  --color-stone-200: #E7E5E4;
+  --color-stone-300: #D6D3D1;
+  --color-stone-400: #A8A29E;
+  --color-stone-500: #78716C;
+  --color-stone-600: #57534E;
+  --color-stone-700: #44403C;
+  --color-stone-800: #292524;
+  --color-stone-900: #1C1917;
 
-  /* Dynamic theme colors (set per-page) */
-  --theme-primary: var(--color-asa-green);
-  --theme-secondary: var(--color-asa-blue);
-  --theme-accent: var(--color-asa-yellow);
+  /* ═══════════════════════════════════════════════════════════════
+     IUCN STATUS COLORS (Vibrant for kids, accessible)
+     ═══════════════════════════════════════════════════════════════ */
+  --color-status-lc: #27AE60;  /* Least Concern - Green */
+  --color-status-nt: #F1C40F;  /* Near Threatened - Yellow */
+  --color-status-vu: #F39C12;  /* Vulnerable - Orange */
+  --color-status-en: #E74C3C;  /* Endangered - Red */
+  --color-status-cr: #C0392B;  /* Critically Endangered - Dark Red */
+  --color-status-ew: #8E44AD;  /* Extinct in Wild - Purple */
+  --color-status-ex: #2C3E50;  /* Extinct - Dark */
+  --color-status-dd: #95A5A6;  /* Data Deficient - Gray */
 
-  /* Typography - friendly and readable */
+  /* ═══════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Display - Bold headlines */
   --font-display: 'Lilita One', 'Archivo Black', cursive;
+
+  /* Body - Readable content */
   --font-body: 'Nunito', 'Segoe UI', sans-serif;
+
+  /* Serif - Explorer's journal, naturalist notes */
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+
+  /* Typewriter - Expedition logs, dates, labels */
+  --font-typewriter: 'Special Elite', 'Courier New', monospace;
+
+  /* Handwritten - Personal notes, signatures */
   --font-handwritten: 'Patrick Hand', cursive;
+
+  /* Fun - Buttons, badges */
   --font-fun: 'Fredoka', sans-serif;
 
-  /* Spacing */
+  /* ═══════════════════════════════════════════════════════════════
+     SPACING
+     ═══════════════════════════════════════════════════════════════ */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -46,21 +125,37 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
 
-  /* Border radius - rounded and friendly */
+  /* ═══════════════════════════════════════════════════════════════
+     BORDER RADIUS
+     ═══════════════════════════════════════════════════════════════ */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
   --radius-full: 9999px;
 
-  /* Shadows - playful and soft */
+  /* ═══════════════════════════════════════════════════════════════
+     SHADOWS
+     ═══════════════════════════════════════════════════════════════ */
   --shadow-sm: 0 2px 8px rgba(69, 85, 96, 0.08);
   --shadow-md: 0 4px 16px rgba(69, 85, 96, 0.12);
   --shadow-lg: 0 8px 32px rgba(69, 85, 96, 0.16);
+  --shadow-xl: 0 12px 48px rgba(69, 85, 96, 0.20);
+
+  /* Adventure shadows */
+  --shadow-leather: 0 10px 40px rgba(44, 24, 16, 0.5);
+  --shadow-paper: 0 4px 20px rgba(139, 90, 43, 0.15);
+  --shadow-emboss: inset 0 2px 4px rgba(255, 255, 255, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-inset-paper: inset 0 0 30px rgba(139, 90, 43, 0.05);
+
+  /* Glow effects */
   --shadow-glow-green: 0 0 24px rgba(122, 193, 67, 0.4);
   --shadow-glow-yellow: 0 0 24px rgba(255, 209, 0, 0.4);
+  --shadow-glow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
 
-  /* Z-index scale */
+  /* ═══════════════════════════════════════════════════════════════
+     Z-INDEX SCALE
+     ═══════════════════════════════════════════════════════════════ */
   --z-base: 0;
   --z-card: 10;
   --z-dropdown: 100;
@@ -68,12 +163,24 @@
   --z-modal: 300;
   --z-toast: 400;
 
-  /* Navigation heights */
+  /* ═══════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════ */
   --nav-bottom-height: 72px;
   --header-height: 64px;
+
+  /* ═══════════════════════════════════════════════════════════════
+     DYNAMIC THEME (set per-page)
+     ═══════════════════════════════════════════════════════════════ */
+  --theme-primary: var(--color-asa-green);
+  --theme-secondary: var(--color-asa-blue);
+  --theme-accent: var(--color-asa-yellow);
 }
 
-/* Fun animations */
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
 @keyframes bounce-in {
   0% { transform: scale(0); opacity: 0; }
   50% { transform: scale(1.1); }
@@ -106,7 +213,20 @@
   100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
 }
 
-/* Reduced motion preference */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes paper-flutter {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION PREFERENCE
+   ═══════════════════════════════════════════════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
