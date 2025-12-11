@@ -1,0 +1,83 @@
+{
+  "id": "postcard-karina",
+  "type": "field-postcard",
+  "title": "Purple Frog Discovery",
+  "theme": {
+    "primary": "#6B4C9A",
+    "secondary": "#9B7BC7",
+    "accent": "#FFD166",
+    "dark": "#2D1F3D",
+    "light": "#F5F0FA"
+  },
+  "hero": {
+    "region": "India",
+    "descriptor": "The Bizarre",
+    "descriptorAccent": "Beautiful",
+    "speciesCommon": "Purple Frog",
+    "tagline": "A living fossil hiding underground"
+  },
+  "fieldNotes": {
+    "species": "Purple Frog",
+    "scientificName": "Nasikabatrachus sahyadrensis",
+    "location": "Western Ghats, India",
+    "status": "EN",
+    "researcher": "Dr. Karina Patel"
+  },
+  "speciesPhotos": {
+    "hero": "/images/species/purple-frog-hero.jpg",
+    "alt": "A purple frog with a pointed snout emerging from soil",
+    "credits": "Photo: Dr. Karina Patel / ASA"
+  },
+  "funFacts": [
+    {
+      "emoji": "🕰️",
+      "title": "Living Fossil",
+      "description": "Purple frogs have been around for 130 million years - since the time of dinosaurs!"
+    },
+    {
+      "emoji": "🦔",
+      "title": "Underground Life",
+      "description": "They spend most of their life underground, only coming up for about two weeks each year to breed."
+    },
+    {
+      "emoji": "👃",
+      "title": "Special Snout",
+      "description": "Their pointy nose helps them eat termites and ants underground."
+    },
+    {
+      "emoji": "🎵",
+      "title": "Chicken Call",
+      "description": "Males make a sound like a chicken clucking to attract females!"
+    }
+  ],
+  "sizeComparison": {
+    "size": "7 cm (about 3 inches)",
+    "comparedTo": "About the size of a chicken egg"
+  },
+  "soundClip": "/audio/purple-frog-call.mp3",
+  "researcher": {
+    "name": "Dr. Karina Patel",
+    "photo": "/images/researchers/karina-portrait.jpg",
+    "fieldPhoto": "/images/researchers/karina-field.jpg",
+    "quote": "Every time I find a purple frog, it feels like discovering a tiny dinosaur. These animals connect us to a world 130 million years ago!",
+    "story": "Dr. Karina has been studying purple frogs in India's Western Ghats for over 10 years. She works with local communities to protect the forests where these unique frogs live. When she's not in the field, she loves teaching kids about amphibian conservation.",
+    "photoCredits": [
+      {
+        "photo": "Portrait",
+        "credit": "National Geographic"
+      },
+      {
+        "photo": "Field photo",
+        "credit": "ASA India"
+      }
+    ]
+  },
+  "mapLocation": {
+    "country": "India",
+    "coordinates": [10.5, 76.5]
+  },
+  "stamp": {
+    "emoji": "🟣",
+    "title": "India: Purple Frog"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "app": {
+    "name": "The Ribbit Report",
+    "tagline": "A magazine for young amphibian explorers"
+  },
+  "nav": {
+    "home": "Home",
+    "explore": "Explore",
+    "collection": "My Collection",
+    "currentIssue": "Current Issue"
+  },
+  "home": {
+    "latestIssue": "Latest Issue",
+    "readNow": "Read Now",
+    "downloadOffline": "Download for Offline"
+  },
+  "issue": {
+    "tableOfContents": "Table of Contents",
+    "articles": "Articles",
+    "readingTime": "{{minutes}} min read",
+    "completed": "Completed"
+  },
+  "article": {
+    "nextArticle": "Next Article",
+    "previousArticle": "Previous Article",
+    "backToIssue": "Back to Issue",
+    "page": "Page {{current}} of {{total}}"
+  },
+  "collection": {
+    "title": "My Collection",
+    "stamps": "Stamps",
+    "progress": "Progress",
+    "favorites": "Favorites",
+    "noStamps": "No stamps yet! Read Field Postcards to collect stamps from around the world.",
+    "stampsCollected": "{{count}} stamps collected"
+  },
+  "explore": {
+    "title": "Explore",
+    "bySpecies": "By Species",
+    "byRegion": "By Region",
+    "byTopic": "By Topic",
+    "searchPlaceholder": "Search articles..."
+  },
+  "about": {
+    "title": "About",
+    "aboutASA": "About the Amphibian Survival Alliance",
+    "aboutMagazine": "About The Ribbit Report",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "offline": {
+    "youAreOffline": "You're offline",
+    "availableOffline": "Available offline",
+    "needsInternet": "Needs internet",
+    "downloading": "Downloading...",
+    "downloaded": "Downloaded",
+    "downloadFailed": "Download failed"
+  },
+  "quiz": {
+    "question": "Question {{current}} of {{total}}",
+    "checkAnswer": "Check Answer",
+    "correct": "Correct!",
+    "incorrect": "Not quite...",
+    "score": "You scored {{score}} out of {{total}}",
+    "tryAgain": "Try Again",
+    "nextQuestion": "Next Question"
+  },
+  "fieldPostcard": {
+    "fieldNotes": "Field Notes",
+    "funFacts": "Fun Facts",
+    "meetTheResearcher": "Meet the Researcher",
+    "sizeComparison": "Size Comparison",
+    "listenToCall": "Listen to their call",
+    "stampEarned": "Stamp Earned!"
+  },
+  "marshMellow": {
+    "welcome": "Welcome, explorer!",
+    "loading": "Loading...",
+    "offline": "Looks like you're offline!",
+    "error": "Oops! Something went wrong.",
+    "emptyStamps": "Start reading to collect stamps!",
+    "celebration": "Amazing work!"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "share": "Share",
+    "save": "Save"
+  }
+}

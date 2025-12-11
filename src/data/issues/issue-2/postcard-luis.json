@@ -1,0 +1,83 @@
+{
+  "id": "postcard-luis",
+  "type": "field-postcard",
+  "title": "Glass Frog Adventure",
+  "theme": {
+    "primary": "#2D8B5A",
+    "secondary": "#5BC48A",
+    "accent": "#FFD166",
+    "dark": "#1A4D35",
+    "light": "#E6F7EF"
+  },
+  "hero": {
+    "region": "Ecuador",
+    "descriptor": "The Transparent",
+    "descriptorAccent": "Treasure",
+    "speciesCommon": "Glass Frog",
+    "tagline": "See-through and spectacular"
+  },
+  "fieldNotes": {
+    "species": "Reticulated Glass Frog",
+    "scientificName": "Hyalinobatrachium valerioi",
+    "location": "Cloud Forests, Ecuador",
+    "status": "LC",
+    "researcher": "Luis Coloma"
+  },
+  "speciesPhotos": {
+    "hero": "/images/species/glass-frog-hero.jpg",
+    "alt": "A translucent green glass frog showing its internal organs through its belly",
+    "credits": "Photo: Luis Coloma / Jambatu Center"
+  },
+  "funFacts": [
+    {
+      "emoji": "🔍",
+      "title": "See-Through Skin",
+      "description": "You can see their heart, liver, and intestines through their transparent belly!"
+    },
+    {
+      "emoji": "🥚",
+      "title": "Super Dads",
+      "description": "Male glass frogs guard their eggs, keeping them moist and safe from predators."
+    },
+    {
+      "emoji": "💧",
+      "title": "Waterfall Homes",
+      "description": "They live near streams and waterfalls in cloud forests high in the mountains."
+    },
+    {
+      "emoji": "🌙",
+      "title": "Night Singers",
+      "description": "They're nocturnal and call at night with a high-pitched whistle."
+    }
+  ],
+  "sizeComparison": {
+    "size": "2-3 cm (about 1 inch)",
+    "comparedTo": "Smaller than a grape!"
+  },
+  "soundClip": "/audio/glass-frog-call.mp3",
+  "researcher": {
+    "name": "Luis Coloma",
+    "photo": "/images/researchers/luis-portrait.jpg",
+    "fieldPhoto": "/images/researchers/luis-field.jpg",
+    "quote": "Glass frogs are like tiny windows into the natural world. Their transparent bodies remind us how amazing and delicate life can be.",
+    "story": "Luis runs the Jambatu Center in Ecuador, where he and his team work to save some of the world's most endangered frogs. He's discovered several new species and has helped bring some back from the edge of extinction!",
+    "photoCredits": [
+      {
+        "photo": "Portrait",
+        "credit": "Jambatu Center"
+      },
+      {
+        "photo": "Field photo",
+        "credit": "National Geographic"
+      }
+    ]
+  },
+  "mapLocation": {
+    "country": "Ecuador",
+    "coordinates": [-0.5, -78.5]
+  },
+  "stamp": {
+    "emoji": "🪟",
+    "title": "Ecuador: Glass Frog"
+  }
+}

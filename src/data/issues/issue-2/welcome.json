@@ -1,0 +1,23 @@
+{
+  "id": "welcome",
+  "type": "welcome-letter",
+  "title": "MarshMellow's Welcome",
+  "theme": {
+    "primary": "#2D5A27",
+    "secondary": "#4A7C42",
+    "accent": "#FFD166",
+    "dark": "#1A3518",
+    "light": "#E8F5E3"
+  },
+  "from": "MarshMellow",
+  "greeting": "Hello, amazing explorers!",
+  "body": [
+    "Welcome to Issue #2 of The Ribbit Report! I'm so excited you're here.",
+    "In this issue, we're going on a world tour to meet some incredible researchers who dedicate their lives to studying and protecting amphibians. You'll travel from the cloud forests of Ecuador to the Western Ghats of India!",
+    "Make sure to collect your stamps as you read each Field Postcard - they're like souvenirs from your global adventure!",
+    "Did you know that amphibians have been around for over 300 million years? That's way before the dinosaurs! But today, many of them need our help. The researchers you'll meet in this issue are working hard to make sure these amazing creatures are around for another 300 million years.",
+    "Ready to explore? Let's hop to it!"
+  ],
+  "signOff": "Your friend in exploration,",
+  "mascotPose": "waving"
+}

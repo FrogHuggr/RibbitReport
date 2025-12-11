@@ -1,0 +1,62 @@
+{
+  "id": "issue-2",
+  "number": 2,
+  "title": "Global Explorers",
+  "theme": "Meet researchers from around the world!",
+  "coverImage": "/images/issues/issue-2-cover.jpg",
+  "publishDate": "2024-12-01",
+  "welcomeMessage": {
+    "from": "MarshMellow",
+    "content": "Welcome back, explorers! In this issue, we're going on a world tour to meet amazing researchers and the incredible amphibians they study. From the misty mountains of Ecuador to the underground burrows of India, get ready for an adventure!"
+  },
+  "articles": [
+    {
+      "id": "welcome",
+      "type": "welcome-letter",
+      "title": "MarshMellow's Welcome",
+      "thumbnail": "/images/issues/issue-2/welcome-thumb.jpg",
+      "readingTime": 2,
+      "contentPath": "/data/issues/issue-2/welcome.json"
+    },
+    {
+      "id": "postcard-karina",
+      "type": "field-postcard",
+      "title": "Purple Frog Discovery",
+      "thumbnail": "/images/issues/issue-2/postcard-karina-thumb.jpg",
+      "readingTime": 5,
+      "contentPath": "/data/issues/issue-2/postcard-karina.json"
+    },
+    {
+      "id": "postcard-luis",
+      "type": "field-postcard",
+      "title": "Glass Frog Adventure",
+      "thumbnail": "/images/issues/issue-2/postcard-luis-thumb.jpg",
+      "readingTime": 5,
+      "contentPath": "/data/issues/issue-2/postcard-luis.json"
+    },
+    {
+      "id": "myth-frogs-toads",
+      "type": "myth-buster",
+      "title": "Frogs vs Toads: What's the Difference?",
+      "thumbnail": "/images/issues/issue-2/myth-thumb.jpg",
+      "readingTime": 3,
+      "contentPath": "/data/issues/issue-2/myth-frogs-toads.json"
+    },
+    {
+      "id": "species-axolotl",
+      "type": "species-spotlight",
+      "title": "Amazing Axolotl",
+      "thumbnail": "/images/issues/issue-2/axolotl-thumb.jpg",
+      "readingTime": 4,
+      "contentPath": "/data/issues/issue-2/species-axolotl.json"
+    },
+    {
+      "id": "quiz-issue-2",
+      "type": "quiz",
+      "title": "Test Your Knowledge!",
+      "thumbnail": "/images/issues/issue-2/quiz-thumb.jpg",
+      "readingTime": 5,
+      "contentPath": "/data/issues/issue-2/quiz-issue-2.json"
+    }
+  ]
+}

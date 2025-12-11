@@ -1,0 +1,44 @@
+{
+  "id": "species-axolotl",
+  "type": "species-spotlight",
+  "title": "Amazing Axolotl",
+  "theme": {
+    "primary": "#E85D75",
+    "secondary": "#F5899A",
+    "accent": "#FFD166",
+    "dark": "#8B2A3D",
+    "light": "#FFF0F3"
+  },
+  "species": {
+    "commonName": "Axolotl",
+    "scientificName": "Ambystoma mexicanum",
+    "status": "CR"
+  },
+  "sections": [
+    {
+      "title": "What is an Axolotl?",
+      "content": "The axolotl (say: AX-oh-lot-ul) is a type of salamander that never grows up! While most salamanders transform from tadpoles into land-living adults, axolotls keep their feathery gills and stay in the water their whole lives. They're like the Peter Pans of the amphibian world!",
+      "image": "/images/species/axolotl-intro.jpg"
+    },
+    {
+      "title": "Super Regeneration",
+      "content": "Axolotls have an incredible superpower: they can regrow almost any body part! Lost a leg? It grows back. Damaged their heart? They can repair it. Scientists study axolotls hoping to learn how humans might one day be able to heal better too.",
+      "image": "/images/species/axolotl-regeneration.jpg"
+    },
+    {
+      "title": "Lake Xochimilco",
+      "content": "In the wild, axolotls only live in one place: Lake Xochimilco in Mexico City. The Aztec people named them 'axolotl' after their god Xolotl. Sadly, pollution and invasive fish have made wild axolotls critically endangered.",
+      "image": "/images/species/axolotl-habitat.jpg"
+    },
+    {
+      "title": "Conservation Heroes",
+      "content": "Scientists and local communities are working together to save axolotls. They're cleaning up the lake, creating special floating gardens called 'chinampas' for axolotls to live in, and breeding them in labs to keep the species alive.",
+      "image": "/images/species/axolotl-conservation.jpg"
+    },
+    {
+      "title": "Fun Facts",
+      "content": "Axolotls come in many colors including pink, white, gold, and their natural dark color. They can live 10-15 years and eat worms, small fish, and anything else that fits in their mouth. They smile! Well, it looks like they're always smiling because of how their mouth is shaped.",
+      "image": "/images/species/axolotl-colors.jpg"
+    }
+  ]
+}

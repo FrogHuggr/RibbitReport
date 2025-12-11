@@ -1,0 +1,39 @@
+{
+  "id": "myth-frogs-toads",
+  "type": "myth-buster",
+  "title": "Frogs vs Toads: What's the Difference?",
+  "theme": {
+    "primary": "#E07B39",
+    "secondary": "#F5A66B",
+    "accent": "#FFD166",
+    "dark": "#7D3D15",
+    "light": "#FFF5ED"
+  },
+  "myths": [
+    {
+      "myth": "Frogs and toads are completely different animals",
+      "truth": "All toads are actually frogs! 'Toad' is just a common name for frogs that have dry, bumpy skin. Scientists call them all 'anurans' (the order Anura).",
+      "image": "/images/content/myth-frog-toad.jpg"
+    },
+    {
+      "myth": "Touching a toad will give you warts",
+      "truth": "Warts are caused by a human virus, not toads! Those bumps on toads are actually glands that help them stay moist and can produce toxins to deter predators.",
+      "image": "/images/content/myth-warts.jpg"
+    },
+    {
+      "myth": "Frogs always live in water",
+      "truth": "While many frogs need water to breed, some species live in trees, underground, or even in deserts! The Purple Frog spends most of its life underground.",
+      "image": "/images/content/myth-water.jpg"
+    },
+    {
+      "myth": "All frogs are green",
+      "truth": "Frogs come in almost every color imaginable! Blue poison dart frogs, red tomato frogs, and yes, purple frogs all exist in nature.",
+      "image": "/images/content/myth-colors.jpg"
+    },
+    {
+      "myth": "Frogs are slimy and gross",
+      "truth": "The mucus on frog skin is actually amazing! It keeps them hydrated, protects against bacteria, and some frogs even produce substances that scientists use to make medicine.",
+      "image": "/images/content/myth-slimy.jpg"
+    }
+  ]
+}
