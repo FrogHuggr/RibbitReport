@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppShell } from './components/layout';
-import { Home, Dispatches, MythBusters, WorldMap, Passport, Settings, Help } from './pages';
+import { Home, Dispatches, DispatchDetail, MythBusters, WorldMap, Passport, Settings, Help } from './pages';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
 
           {/* Field Dispatches */}
           <Route path="dispatches" element={<Dispatches />} />
-          <Route path="dispatches/:dispatchId" element={<Dispatches />} />
+          <Route path="dispatches/:dispatchId" element={<DispatchDetail />} />
 
           {/* Myth Busters */}
           <Route path="myths" element={<MythBusters />} />

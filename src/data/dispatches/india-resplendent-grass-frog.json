@@ -1,0 +1,52 @@
+{
+  "id": "india-resplendent-grass-frog",
+  "title": "Born Ready",
+  "subtitle": "The Resplendent Grass Frog",
+
+  "species": {
+    "commonName": "Resplendent Grass Frog",
+    "scientificName": "Raorchestes resplendens",
+    "status": "CR",
+    "range": ["India"]
+  },
+
+  "location": {
+    "country": "India",
+    "region": "Western Ghats",
+    "flagColors": ["#FF9933", "#FFFFFF", "#138808"]
+  },
+
+  "researcher": {
+    "name": "Harikrishnan S",
+    "organization": "Wildlife Trust of India",
+    "quote": "The best part about working with frogs is watching them in the wild. I mean, have you seen how cute they are?",
+    "photoCredit": "Sreenanth K"
+  },
+
+  "content": {
+    "intro": "High in India's misty Western Ghats mountains lives a tiny frog that glows like a living jewel. And this little one doesn't wait around to grow up!",
+    "facts": [
+      {
+        "title": "No Tadpole? No Problem!",
+        "text": "These frogs skip the tadpole stage completely. The eggs hatch straight into tiny, fully-formed frogs!"
+      },
+      {
+        "title": "Walkers, Not Hoppers",
+        "text": "Unlike most frogs, these little ones don't like to hop. Instead, they walk clumsily along grass blades!"
+      },
+      {
+        "title": "Hide and Seek Champions",
+        "text": "They hide from flashlights! When researchers shine lights at night, these frogs sneak away into the grass."
+      }
+    ],
+    "fieldNote": "Resplendent Grass Frogs have evolved to survive in the cold, open grasslands in the mountains of Western Ghats. More than 70% of these grasslands have disappeared, and now the surviving frogs are threatened by habitat loss and climate change."
+  },
+
+  "images": [
+    { "src": "species-hero.jpeg", "type": "hero", "caption": "A Resplendent Grass Frog showing off its brilliant orange and black pattern", "credit": "Harikrishnan S" },
+    { "src": "species-detail.jpg", "type": "detail", "caption": "Look at those glowing eyes! The name 'resplendens' means 'shining' in Latin", "credit": "Harikrishnan S" },
+    { "src": "researcher.jpg", "type": "researcher", "credit": "Sreenanth K" }
+  ],
+
+  "photoCredits": ["Harikrishnan S", "Sreenanth K"]
+}

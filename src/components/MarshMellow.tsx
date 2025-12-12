@@ -1,12 +1,34 @@
 /**
  * MarshMellow - The Ribbit Report's explorer frog mascot!
  *
- * Available poses (add more as they're created):
+ * Available poses:
  * - explorer: Default pose with binoculars and fedora
- * - (future) waving, celebrating, reading, pointing, thinking, etc.
+ * - wave: Friendly greeting wave
+ * - celebrating: Excited celebration pose
+ * - reading: Reading a book/document
+ * - mapPointing: Pointing at a map
+ * - thinking: Contemplative pose
+ * - stampCollecting: Collecting stamps for passport
+ * - searching: Looking/searching for something
+ * - lost: Confused or lost expression
+ * - sleeping: Sleepy/resting pose
+ * - head: Just the head (for tight spaces)
+ * - outline: Silhouette version
  */
 
-export type MarshMellowPose = 'explorer';
+export type MarshMellowPose =
+  | 'explorer'
+  | 'wave'
+  | 'celebrating'
+  | 'reading'
+  | 'mapPointing'
+  | 'thinking'
+  | 'stampCollecting'
+  | 'searching'
+  | 'lost'
+  | 'sleeping'
+  | 'head'
+  | 'outline';
 
 interface MarshMellowProps {
   pose?: MarshMellowPose;
@@ -17,6 +39,17 @@ interface MarshMellowProps {
 
 const POSE_IMAGES: Record<MarshMellowPose, string> = {
   explorer: '/images/mascot/marshmellow-explorer.png',
+  wave: '/images/mascot/marshmellow-wave.png',
+  celebrating: '/images/mascot/marshmellow-celebrating.png',
+  reading: '/images/mascot/marshmellow-reading.png',
+  mapPointing: '/images/mascot/marshmellow-map-pointing.png',
+  thinking: '/images/mascot/marshmellow-thinking.png',
+  stampCollecting: '/images/mascot/marshmellow-stampcollecting.png',
+  searching: '/images/mascot/marshmellow-searching.png',
+  lost: '/images/mascot/marshmellow-lost.png',
+  sleeping: '/images/mascot/marshmellow-sleeping.png',
+  head: '/images/mascot/marshmellow-head.png',
+  outline: '/images/mascot/marshmellow-outline.png',
 };
 
 const SIZE_CLASSES = {
