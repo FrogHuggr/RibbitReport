@@ -246,66 +246,74 @@ function Polaroid({
 function FlipCard({ title, text, index }: { title: string; text: string; index: number }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  // Card style variations
+  // Card style variations - nature/adventure themed
   const cardStyles = [
-    { front: '#3D5A3D', accent: '#7AC143', icon: '?' }, // Forest green
-    { front: '#5A4A3D', accent: '#D4AF37', icon: '!' }, // Earth brown
-    { front: '#3D4A5A', accent: '#97B3CA', icon: '*' }, // Slate blue
+    { front: '#2D4A3E', accent: '#7AC143', label: 'DID YOU KNOW?' }, // Deep forest
+    { front: '#4A3D2D', accent: '#D4AF37', label: 'FIELD FACT' }, // Rich earth
+    { front: '#2D3D4A', accent: '#97B3CA', label: 'DISCOVERY' }, // Deep slate
   ];
   const style = cardStyles[index % cardStyles.length];
 
   return (
     <div
-      className="perspective-1000 cursor-pointer h-44"
+      className="flip-card-container cursor-pointer h-48"
       onClick={() => setIsFlipped(!isFlipped)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && setIsFlipped(!isFlipped)}
+      aria-label={`Flip card: ${title}`}
     >
-      <div
-        className="relative w-full h-full transition-transform duration-500 transform-style-3d"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-        }}
-      >
-        {/* Front of card - Title with "tap to reveal" */}
+      <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
+        {/* Front of card */}
         <div
-          className="absolute inset-0 rounded-xl p-4 flex flex-col items-center justify-center text-center backface-hidden"
+          className="flip-card-face p-5 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
-            background: `linear-gradient(135deg, ${style.front} 0%, ${style.front}dd 100%)`,
-            backfaceVisibility: 'hidden',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+            background: `linear-gradient(145deg, ${style.front} 0%, ${style.front}ee 100%)`,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)',
           }}
         >
-          {/* Decorative question mark */}
-          <div
-            className="w-12 h-12 rounded-full flex items-center justify-center mb-3 text-2xl font-bold"
-            style={{ background: style.accent, color: 'white' }}
+          {/* Decorative top label */}
+          <span
+            className="text-[9px] tracking-[0.2em] font-bold mb-3 px-3 py-1 rounded-full"
+            style={{ background: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.8)' }}
           >
-            {style.icon}
-          </div>
-          <h4 className="font-bold text-white text-base leading-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+            {style.label}
+          </span>
+
+          <h4 className="font-bold text-white text-lg leading-snug mb-4" style={{ fontFamily: 'Georgia, serif' }}>
             {title}
           </h4>
-          <p className="text-white/60 text-xs mt-auto">Tap to discover</p>
+
+          {/* Tap indicator */}
+          <div className="mt-auto flex items-center gap-2 text-white/50">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+            </svg>
+            <span className="text-xs">Tap to reveal</span>
+          </div>
         </div>
 
-        {/* Back of card - The answer/fact */}
+        {/* Back of card */}
         <div
-          className="absolute inset-0 rounded-xl p-4 flex flex-col backface-hidden"
+          className="flip-card-face flip-card-back p-5 flex flex-col overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #FFFEF7 0%, #FBF8F1 100%)',
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-            borderLeft: `4px solid ${style.accent}`,
+            background: 'linear-gradient(145deg, #FFFEF7 0%, #F8F4EA 100%)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+            borderLeft: `5px solid ${style.accent}`,
           }}
         >
-          <h4 className="font-bold text-stone-800 text-sm mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+          <h4 className="font-bold text-stone-800 text-sm mb-3" style={{ fontFamily: 'Georgia, serif' }}>
             {title}
           </h4>
-          <p className="text-sm text-stone-600 leading-relaxed flex-1">
+          <p className="text-sm text-stone-600 leading-relaxed flex-1 overflow-y-auto">
             {text}
           </p>
-          <p className="text-stone-400 text-xs mt-2 text-right">Tap to flip back</p>
+          <p className="text-stone-400 text-xs mt-3 text-right flex items-center justify-end gap-1">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+            </svg>
+            Tap to flip
+          </p>
         </div>
       </div>
     </div>
@@ -521,10 +529,19 @@ export function DispatchDetail() {
 
         {/* Fun Facts section - Interactive Flip Cards */}
         <section className="mb-8">
-          <h2 className="text-xl text-stone-800 mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-            Amazing Facts
-          </h2>
-          <p className="text-sm text-stone-500 mb-4 italic">Tap each card to discover something amazing!</p>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{
+              background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+            }}>
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h2 className="text-xl text-stone-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Amazing Facts
+            </h2>
+          </div>
+          <p className="text-sm text-stone-500 mb-4 ml-11">Tap each card to discover something amazing!</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {dispatch.content.facts.map((fact, index) => (
               <FlipCard key={index} title={fact.title} text={fact.text} index={index} />
@@ -535,9 +552,19 @@ export function DispatchDetail() {
         {/* Field photos if any */}
         {fieldImages.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-xl text-stone-800 mb-4 flex items-center gap-2" style={{ fontFamily: 'Georgia, serif' }}>
-              <span className="text-2xl">📸</span> From the Field
-            </h2>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #97B3CA 0%, #7A9BB5 100%)',
+              }}>
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h2 className="text-xl text-stone-800" style={{ fontFamily: 'Georgia, serif' }}>
+                From the Field
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {fieldImages.map((img, index) => (
                 <Polaroid
@@ -552,25 +579,39 @@ export function DispatchDetail() {
           </section>
         )}
 
-        {/* Conservation Note */}
+        {/* Conservation Field Note */}
         <section className="mb-8">
-          <div className="rounded-xl p-5 relative overflow-hidden border border-amber-200" style={{
+          <div className="rounded-xl overflow-hidden" style={{
             background: 'linear-gradient(135deg, #FDF8F3 0%, #F5E6D3 100%)',
+            boxShadow: '0 4px 20px rgba(139, 90, 43, 0.15)',
           }}>
-            {/* Decorative leaf/nature corner */}
-            <div className="absolute top-3 right-3 text-3xl opacity-20">
-              🌿
-            </div>
-
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">📋</span>
-              <p className="text-amber-800 text-xs font-bold tracking-[0.15em] uppercase">
+            {/* Header bar */}
+            <div className="px-5 py-3 flex items-center gap-3" style={{
+              background: 'linear-gradient(90deg, #5D6B4D 0%, #4A5A3D 100%)',
+              borderBottom: '3px solid #7AC143',
+            }}>
+              {/* Clipboard icon */}
+              <svg className="w-5 h-5 text-amber-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              <p className="text-amber-100 text-xs font-bold tracking-[0.15em] uppercase">
                 Field Note
               </p>
             </div>
-            <p className="text-stone-700 leading-relaxed relative z-10" style={{ fontFamily: 'Georgia, serif' }}>
-              {dispatch.content.fieldNote}
-            </p>
+
+            {/* Content */}
+            <div className="p-5 relative">
+              {/* Decorative corner flourish */}
+              <div className="absolute bottom-3 right-3 opacity-10">
+                <svg className="w-12 h-12 text-amber-800" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+              </div>
+
+              <p className="text-stone-700 leading-relaxed relative z-10 text-[15px]" style={{ fontFamily: 'Georgia, serif' }}>
+                {dispatch.content.fieldNote}
+              </p>
+            </div>
           </div>
         </section>
 
@@ -619,80 +660,94 @@ export function DispatchDetail() {
           </div>
         </section>
 
-        {/* Mission Complete - Achievement Card with Wax Seal */}
+        {/* Mission Complete - Achievement Card */}
         <div className="rounded-xl overflow-hidden shadow-xl" style={{
-          background: 'linear-gradient(135deg, #2C1810 0%, #3D2317 100%)',
+          background: 'linear-gradient(145deg, #F8F4EA 0%, #EDE8DC 100%)',
           border: '2px solid #D4AF37',
         }}>
-          {/* Gold trim header */}
-          <div className="h-2" style={{
-            background: 'linear-gradient(90deg, #B8860B 0%, #D4AF37 50%, #B8860B 100%)',
-          }} />
+          {/* Header with achievement ribbon */}
+          <div className="relative py-4 px-6" style={{
+            background: 'linear-gradient(135deg, #2D4A3E 0%, #1F3A2F 100%)',
+          }}>
+            {/* Ribbon corners */}
+            <div className="absolute left-0 bottom-0 w-0 h-0" style={{
+              borderLeft: '12px solid transparent',
+              borderTop: '12px solid #1F3A2F',
+            }} />
+            <div className="absolute right-0 bottom-0 w-0 h-0" style={{
+              borderRight: '12px solid transparent',
+              borderTop: '12px solid #1F3A2F',
+            }} />
 
-          <div className="p-6 text-center relative">
-            {/* Wax seal */}
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-20 h-20">
-              <div className="w-full h-full rounded-full flex items-center justify-center" style={{
-                background: 'radial-gradient(circle at 30% 30%, #C41E3A 0%, #8B0000 60%, #5C0000 100%)',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.2)',
+            <div className="flex items-center justify-center gap-3">
+              {/* Checkmark badge */}
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{
+                background: 'linear-gradient(135deg, #7AC143 0%, #5A9A2F 100%)',
+                boxShadow: '0 2px 8px rgba(122, 193, 67, 0.4)',
               }}>
-                <div className="text-center">
-                  <IconCheck size={24} className="text-amber-100 mx-auto" />
-                  <span className="text-[8px] text-amber-100/80 font-bold tracking-wider">VERIFIED</span>
-                </div>
+                <IconCheck size={20} className="text-white" />
               </div>
-            </div>
-
-            {/* Content */}
-            <div className="mt-12">
-              <h3 className="text-xl text-amber-100 mb-1" style={{ fontFamily: 'Georgia, serif' }}>
-                Mission Complete
-              </h3>
-              <p className="text-amber-400 text-xs tracking-[0.15em] uppercase mb-4">
-                Field Dispatch Received
-              </p>
-
-              {/* Achievement badge */}
-              <div className="inline-block rounded-lg p-4 mb-4" style={{
-                background: 'linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(184,134,11,0.1) 100%)',
-                border: '1px solid rgba(212,175,55,0.3)',
-              }}>
-                <p className="text-amber-200/70 text-xs mb-1">You've earned the</p>
-                <p className="text-amber-100 text-lg font-bold" style={{ fontFamily: 'Georgia, serif' }}>
-                  {dispatch.location.country} Stamp
+              <div>
+                <h3 className="text-lg text-white font-bold" style={{ fontFamily: 'Georgia, serif' }}>
+                  Mission Complete
+                </h3>
+                <p className="text-amber-200/80 text-xs tracking-wider">
+                  FIELD DISPATCH RECEIVED
                 </p>
-                <p className="text-amber-200/50 text-xs mt-1">for your Explorer's Passport</p>
-              </div>
-
-              {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  to="/passport"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
-                  style={{
-                    background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
-                    color: '#2C1810',
-                    boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
-                  }}
-                >
-                  <IconAward size={16} />
-                  View Passport
-                </Link>
-                <Link
-                  to="/dispatches"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm text-amber-200 hover:text-amber-100 transition-colors border border-amber-200/30 hover:border-amber-200/50"
-                >
-                  More Dispatches
-                  <IconChevronRight size={16} />
-                </Link>
               </div>
             </div>
           </div>
 
-          {/* Gold trim footer */}
-          <div className="h-2" style={{
-            background: 'linear-gradient(90deg, #B8860B 0%, #D4AF37 50%, #B8860B 100%)',
-          }} />
+          {/* Content */}
+          <div className="p-6 text-center">
+            {/* Stamp earned display */}
+            <div className="mb-5">
+              <p className="text-stone-500 text-sm mb-2">You've earned a new stamp!</p>
+              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-lg" style={{
+                background: 'linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(184,134,11,0.1) 100%)',
+                border: '2px solid #D4AF37',
+              }}>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+                }}>
+                  <IconAward size={24} className="text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="text-stone-800 font-bold text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                    {dispatch.location.country}
+                  </p>
+                  <p className="text-stone-500 text-xs">Added to your Explorer's Passport</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                to="/passport"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+                  color: '#2C1810',
+                  boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
+                }}
+              >
+                <IconAward size={18} />
+                View Passport
+              </Link>
+              <Link
+                to="/dispatches"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
+                style={{
+                  background: 'linear-gradient(135deg, #2D4A3E 0%, #1F3A2F 100%)',
+                  color: '#F5F0E6',
+                }}
+              >
+                More Dispatches
+                <IconChevronRight size={18} />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Photo credits */}
