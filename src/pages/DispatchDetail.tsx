@@ -66,51 +66,59 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
 };
 
 // ═══════════════════════════════════════════════════════════════
-// TACTILE COMPONENTS - These feel like real objects
+// REFINED TACTILE COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Photo with tape holding it down - feels stuck to the page
-function TapedPhoto({
+// Photo with photo corners - like it's mounted in an album
+function MountedPhoto({
   src,
   alt,
   caption,
   rotation = -2,
-  tapeColor = 'cream',
 }: {
   src: string;
   alt: string;
   caption?: string;
   rotation?: number;
-  tapeColor?: 'cream' | 'green' | 'blue';
 }) {
-  const tapeColors = {
-    cream: 'rgba(255, 235, 205, 0.75)',
-    green: 'rgba(122, 193, 67, 0.55)',
-    blue: 'rgba(151, 179, 202, 0.55)',
-  };
-
   return (
     <div
       className="relative mx-auto"
-      style={{ transform: `rotate(${rotation}deg)`, maxWidth: '340px' }}
+      style={{
+        transform: `rotate(${rotation}deg)`,
+        maxWidth: '320px',
+      }}
     >
-      {/* The photo itself */}
-      <div className="relative bg-white p-2 shadow-lg">
-        {/* Tape pieces */}
+      {/* Photo with warm shadow suggesting thickness */}
+      <div
+        className="relative bg-white p-1"
+        style={{
+          boxShadow: '4px 6px 16px rgba(60, 40, 20, 0.35), 2px 2px 4px rgba(60, 40, 20, 0.15)',
+        }}
+      >
+        {/* Photo corners - aged gold color */}
         <div
-          className="absolute -top-3 left-1/4 w-16 h-6 z-10"
+          className="absolute -top-1 -left-1 w-6 h-6 z-10"
           style={{
-            background: tapeColors[tapeColor],
-            transform: 'rotate(-4deg)',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+            background: 'linear-gradient(135deg, transparent 50%, #8B7355 50%)',
           }}
         />
         <div
-          className="absolute -top-3 right-1/4 w-14 h-6 z-10"
+          className="absolute -top-1 -right-1 w-6 h-6 z-10"
           style={{
-            background: tapeColors[tapeColor],
-            transform: 'rotate(6deg)',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+            background: 'linear-gradient(225deg, transparent 50%, #8B7355 50%)',
+          }}
+        />
+        <div
+          className="absolute -bottom-1 -left-1 w-6 h-6 z-10"
+          style={{
+            background: 'linear-gradient(45deg, transparent 50%, #8B7355 50%)',
+          }}
+        />
+        <div
+          className="absolute -bottom-1 -right-1 w-6 h-6 z-10"
+          style={{
+            background: 'linear-gradient(315deg, transparent 50%, #8B7355 50%)',
           }}
         />
 
@@ -118,18 +126,17 @@ function TapedPhoto({
         <img
           src={src}
           alt={alt}
-          className="w-full h-auto"
-          style={{ filter: 'saturate(1.05) contrast(1.02)' }}
+          className="w-full h-auto block"
         />
       </div>
 
       {/* Handwritten caption below */}
       {caption && (
         <p
-          className="mt-3 text-center text-stone-600 text-sm px-4"
+          className="mt-4 text-center text-stone-600 px-2"
           style={{
             fontFamily: "'Patrick Hand', cursive",
-            fontSize: '15px',
+            fontSize: '16px',
             lineHeight: '1.4',
           }}
         >
@@ -140,34 +147,55 @@ function TapedPhoto({
   );
 }
 
-// Index card with ruled lines - feels like a real specimen card
+// Index card with ruled lines - like an actual specimen card
 function SpecimenCard({ dispatch }: { dispatch: DispatchData }) {
   const status = STATUS_LABELS[dispatch.species.status] || STATUS_LABELS['DD'];
 
   return (
     <div
-      className="relative paper-index-card mx-4 p-0 overflow-hidden"
+      className="relative mx-4"
       style={{
-        transform: 'rotate(0.5deg)',
-        boxShadow: '2px 3px 8px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.1)',
+        transform: 'rotate(1deg)',
+        background: `
+          repeating-linear-gradient(
+            transparent,
+            transparent 27px,
+            #d4cfc4 27px,
+            #d4cfc4 28px
+          ),
+          linear-gradient(135deg, #f8f4eb 0%, #f5f0e4 50%, #f2ece0 100%)
+        `,
+        boxShadow: '3px 4px 12px rgba(60, 40, 20, 0.2), 1px 1px 3px rgba(60, 40, 20, 0.1)',
       }}
     >
       {/* Red line at top like a real index card */}
-      <div className="h-1 w-full" style={{ background: '#E57373' }} />
+      <div className="h-1.5 w-full" style={{ background: '#C9544D' }} />
 
-      {/* Horizontal rules */}
+      {/* Paperclip at top right - silver colored, rotated */}
       <div
-        className="absolute inset-0 top-1 pointer-events-none"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(transparent 0px, transparent 23px, #B8D4E8 23px, #B8D4E8 24px)',
-          backgroundSize: '100% 24px',
-        }}
-      />
+        className="absolute -top-3 right-8 w-6 h-14 z-20"
+        style={{ transform: 'rotate(15deg)' }}
+      >
+        <svg viewBox="0 0 24 56" className="w-full h-full">
+          <path
+            d="M12 0 L12 10 Q12 16 6 16 L6 48 Q6 54 12 54 Q18 54 18 48 L18 20 Q18 14 12 14 L12 10"
+            fill="none"
+            stroke="#A8A8A8"
+            strokeWidth="3"
+          />
+          <path
+            d="M12 0 L12 10 Q12 16 6 16 L6 48 Q6 54 12 54 Q18 54 18 48 L18 20 Q18 14 12 14 L12 10"
+            fill="none"
+            stroke="#C0C0C0"
+            strokeWidth="2"
+          />
+        </svg>
+      </div>
 
       {/* Card content */}
-      <div className="relative p-4 pt-3">
+      <div className="relative p-5 pt-4">
         {/* Header row with specimen number */}
-        <div className="flex justify-between items-start mb-1">
+        <div className="flex justify-between items-start mb-2">
           <span
             className="text-stone-400 text-xs tracking-wider"
             style={{ fontFamily: "'Special Elite', monospace" }}
@@ -175,7 +203,7 @@ function SpecimenCard({ dispatch }: { dispatch: DispatchData }) {
             SPECIMEN #{dispatch.id.split('-').pop()?.toUpperCase()}
           </span>
           <div
-            className="px-2 py-0.5 rounded text-xs font-bold text-white"
+            className="px-2.5 py-1 rounded text-xs font-bold text-white"
             style={{ background: status.color }}
           >
             {dispatch.species.status}
@@ -184,7 +212,7 @@ function SpecimenCard({ dispatch }: { dispatch: DispatchData }) {
 
         {/* Species name - handwritten style */}
         <h3
-          className="text-2xl text-stone-800 mb-0.5 leading-tight"
+          className="text-2xl text-stone-800 mb-1 leading-tight"
           style={{ fontFamily: "'Patrick Hand', cursive" }}
         >
           {dispatch.species.commonName}
@@ -192,38 +220,38 @@ function SpecimenCard({ dispatch }: { dispatch: DispatchData }) {
 
         {/* Scientific name - italic, formal */}
         <p
-          className="text-stone-500 italic mb-4"
-          style={{ fontFamily: "'Libre Baskerville', Georgia, serif", fontSize: '14px' }}
+          className="text-stone-500 italic mb-5"
+          style={{ fontFamily: "'Libre Baskerville', Georgia, serif", fontSize: '15px' }}
         >
           {dispatch.species.scientificName}
         </p>
 
         {/* Location info - typewriter style labels */}
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
           <div>
             <span
-              className="text-stone-400 text-[10px] tracking-widest block"
+              className="text-stone-400 text-[10px] tracking-widest block mb-0.5"
               style={{ fontFamily: "'Special Elite', monospace" }}
             >
               LOCATION:
             </span>
             <span
               className="text-stone-700"
-              style={{ fontFamily: "'Patrick Hand', cursive", fontSize: '16px' }}
+              style={{ fontFamily: "'Patrick Hand', cursive", fontSize: '17px' }}
             >
               {dispatch.location.region}
             </span>
           </div>
           <div>
             <span
-              className="text-stone-400 text-[10px] tracking-widest block"
+              className="text-stone-400 text-[10px] tracking-widest block mb-0.5"
               style={{ fontFamily: "'Special Elite', monospace" }}
             >
               COUNTRY:
             </span>
             <span
               className="text-stone-700"
-              style={{ fontFamily: "'Patrick Hand', cursive", fontSize: '16px' }}
+              style={{ fontFamily: "'Patrick Hand', cursive", fontSize: '17px' }}
             >
               {dispatch.location.country}
             </span>
@@ -231,82 +259,86 @@ function SpecimenCard({ dispatch }: { dispatch: DispatchData }) {
         </div>
 
         {/* Status explanation */}
-        <div className="mt-3 pt-2 border-t border-stone-200">
+        <div className="mt-4 pt-3 border-t border-stone-300/50">
           <span
-            className="text-stone-400 text-[10px] tracking-widest block mb-0.5"
+            className="text-stone-400 text-[10px] tracking-widest block mb-1"
             style={{ fontFamily: "'Special Elite', monospace" }}
           >
-            STATUS:
+            CONSERVATION STATUS:
           </span>
           <span
-            className="font-medium"
-            style={{ color: status.color, fontFamily: "'Libre Baskerville', serif", fontSize: '13px' }}
+            className="font-semibold"
+            style={{ color: status.color, fontFamily: "'Libre Baskerville', serif", fontSize: '14px' }}
           >
             {status.label}
           </span>
         </div>
       </div>
-
-      {/* Paperclip decoration */}
-      <div className="absolute -top-2 right-6 w-5 h-12">
-        <svg viewBox="0 0 20 48" className="w-full h-full">
-          <path
-            d="M10 0 L10 8 Q10 12 6 12 L6 40 Q6 46 10 46 Q14 46 14 40 L14 16 Q14 12 10 12 L10 8"
-            fill="none"
-            stroke="#9CA3AF"
-            strokeWidth="2.5"
-          />
-        </svg>
-      </div>
     </div>
   );
 }
 
-// Torn paper fact scrap - feels like ripped notebook paper
-function FactScrap({
+// Aged paper fact card - torn edges, warm colors, varied rotation
+function FactCard({
   title,
   text,
-  rotation = 0,
-  variant = 0,
+  index,
 }: {
   title: string;
   text: string;
-  rotation?: number;
-  variant?: number;
+  index: number;
 }) {
-  // Different paper colors for variety
+  // Aged paper colors - NOT pastel, warm and vintage
   const papers = [
-    { bg: '#FFF9E6', accent: '#D4AF37' }, // Cream/gold
-    { bg: '#F0FDF4', accent: '#22C55E' }, // Pale green
-    { bg: '#FFF7ED', accent: '#EA580C' }, // Warm cream
-    { bg: '#EFF6FF', accent: '#3B82F6' }, // Cool blue tint
+    { bg: '#f4edd8', accent: '#8B7355' }, // Aged cream
+    { bg: '#f9f3e3', accent: '#9B8B6B' }, // Warm ivory
+    { bg: '#faf6e9', accent: '#7D6B4D' }, // Manila
+    { bg: '#f5efe0', accent: '#8B7B5B' }, // Legal pad
   ];
-  const paper = papers[variant % papers.length];
+  const paper = papers[index % papers.length];
+
+  // Varied rotations for each card
+  const rotations = [-2.5, 1.5, -1, 2, -1.5, 1];
+  const rotation = rotations[index % rotations.length];
+
+  // Vertical offset for overlap effect
+  const offsets = [0, -8, 4, -4, 8, -6];
+  const offset = offsets[index % offsets.length];
 
   return (
     <div
       className="relative p-4 pb-5"
       style={{
         background: paper.bg,
-        transform: `rotate(${rotation}deg)`,
-        boxShadow: '2px 3px 6px rgba(0,0,0,0.12)',
+        transform: `rotate(${rotation}deg) translateY(${offset}px)`,
+        boxShadow: '3px 4px 8px rgba(60, 40, 20, 0.18)',
+        // Torn paper edges - irregular polygon
         clipPath: `polygon(
-          0% 3%, 4% 0%, 8% 4%, 12% 1%, 16% 3%, 20% 0%, 24% 2%, 28% 0%, 32% 3%, 36% 1%,
-          40% 4%, 44% 0%, 48% 2%, 52% 0%, 56% 3%, 60% 1%, 64% 4%, 68% 0%, 72% 2%,
-          76% 0%, 80% 3%, 84% 1%, 88% 4%, 92% 0%, 96% 2%, 100% 0%,
-          100% 97%, 96% 100%, 92% 96%, 88% 99%, 84% 97%, 80% 100%, 76% 98%,
-          72% 100%, 68% 97%, 64% 99%, 60% 96%, 56% 100%, 52% 98%, 48% 100%,
-          44% 97%, 40% 99%, 36% 96%, 32% 100%, 28% 98%, 24% 100%, 20% 97%,
-          16% 99%, 12% 96%, 8% 100%, 4% 98%, 0% 100%
+          0% 2%, 3% 0%, 7% 3%, 11% 1%, 15% 4%, 19% 0%, 23% 2%, 27% 0%, 31% 3%, 35% 1%,
+          39% 4%, 43% 0%, 47% 2%, 51% 0%, 55% 3%, 59% 1%, 63% 4%, 67% 0%, 71% 2%,
+          75% 0%, 79% 3%, 83% 1%, 87% 4%, 91% 0%, 95% 2%, 100% 1%,
+          100% 98%, 97% 100%, 93% 97%, 89% 99%, 85% 96%, 81% 100%, 77% 98%,
+          73% 100%, 69% 97%, 65% 99%, 61% 96%, 57% 100%, 53% 98%, 49% 100%,
+          45% 97%, 41% 99%, 37% 96%, 33% 100%, 29% 98%, 25% 100%, 21% 97%,
+          17% 99%, 13% 96%, 9% 100%, 5% 98%, 1% 100%, 0% 97%
         )`,
       }}
     >
+      {/* Small pushpin at top */}
+      <div
+        className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full z-10"
+        style={{
+          background: 'radial-gradient(circle at 30% 30%, #DC4444 0%, #AA2222 100%)',
+          boxShadow: '0 2px 3px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.3)',
+        }}
+      />
+
       {/* Title with underline */}
       <h4
-        className="font-bold mb-2 pb-1 border-b-2"
+        className="font-bold mb-2 pb-1 border-b-2 mt-2"
         style={{
           fontFamily: "'Patrick Hand', cursive",
-          fontSize: '17px',
+          fontSize: '18px',
           color: '#3D2317',
           borderColor: paper.accent,
         }}
@@ -320,6 +352,7 @@ function FactScrap({
         style={{
           fontFamily: "'Nunito', sans-serif",
           fontSize: '14px',
+          lineHeight: '1.6',
         }}
       >
         {text}
@@ -328,7 +361,60 @@ function FactScrap({
   );
 }
 
-// Polaroid with handwritten name underneath
+// Proper notebook page for field notes - margin on LEFT, text sits on lines
+function FieldNotesPage({ text }: { text: string }) {
+  return (
+    <div
+      className="relative mx-4"
+      style={{
+        // Yellow-tinted paper with blue lines and red margin
+        background: `
+          linear-gradient(to right, transparent 38px, #d4a4a4 38px, #d4a4a4 40px, transparent 40px),
+          repeating-linear-gradient(
+            transparent,
+            transparent 27px,
+            #c9d4e8 27px,
+            #c9d4e8 28px
+          ),
+          #faf8e8
+        `,
+        boxShadow: '3px 4px 12px rgba(60, 40, 20, 0.15)',
+        transform: 'rotate(-0.5deg)',
+        minHeight: '160px',
+      }}
+    >
+      {/* "Field Notes" stamp in corner */}
+      <div
+        className="absolute top-3 right-3 px-3 py-1 border-2 text-xs font-bold tracking-wider"
+        style={{
+          fontFamily: "'Special Elite', monospace",
+          transform: 'rotate(4deg)',
+          borderColor: '#2D5A3D',
+          color: '#2D5A3D',
+          opacity: 0.75,
+        }}
+      >
+        FIELD NOTES
+      </div>
+
+      {/* Text content - padded left for margin */}
+      <div className="p-5 pl-12 pt-8">
+        <p
+          className="text-stone-700 relative z-10"
+          style={{
+            fontFamily: "'Patrick Hand', cursive",
+            fontSize: '18px',
+            lineHeight: '28px', // Match the ruled line spacing
+          }}
+        >
+          {text}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// Proper polaroid with thick bottom border and handwritten name
 function ResearcherPolaroid({
   src,
   name,
@@ -341,102 +427,108 @@ function ResearcherPolaroid({
   quote: string;
 }) {
   return (
-    <div className="relative">
-      {/* Polaroid frame */}
+    <div className="flex flex-col sm:flex-row items-start gap-6">
+      {/* Polaroid frame - proper proportions */}
       <div
-        className="bg-white p-2 pb-12 mx-auto relative"
+        className="relative flex-shrink-0"
         style={{
-          maxWidth: '200px',
-          transform: 'rotate(2deg)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1)',
-        }}
-      >
-        <img
-          src={src}
-          alt={name}
-          className="w-full aspect-square object-cover"
-          style={{ filter: 'saturate(0.95)' }}
-        />
-
-        {/* Handwritten name at bottom of polaroid */}
-        <p
-          className="absolute bottom-3 left-0 right-0 text-center text-stone-700"
-          style={{
-            fontFamily: "'Patrick Hand', cursive",
-            fontSize: '16px',
-          }}
-        >
-          {name}
-        </p>
-      </div>
-
-      {/* Quote as a separate note, slightly overlapping */}
-      <div
-        className="relative -mt-4 ml-8 mr-4 p-4 paper-sticky"
-        style={{
-          transform: 'rotate(-1deg)',
-          boxShadow: '2px 2px 5px rgba(0,0,0,0.15)',
-        }}
-      >
-        <p
-          className="text-stone-700 italic leading-relaxed"
-          style={{
-            fontFamily: "'Libre Baskerville', Georgia, serif",
-            fontSize: '14px',
-          }}
-        >
-          "{quote}"
-        </p>
-        {organization && (
-          <p
-            className="text-stone-500 text-xs mt-2"
-            style={{ fontFamily: "'Special Elite', monospace" }}
-          >
-            — {organization}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Notebook page for field notes
-function FieldNotePage({ text }: { text: string }) {
-  return (
-    <div
-      className="relative paper-lined p-5 pt-8 mx-4"
-      style={{
-        boxShadow: '2px 3px 8px rgba(0,0,0,0.12)',
-        transform: 'rotate(-0.5deg)',
-      }}
-    >
-      {/* "Field Notes" header stamp */}
-      <div
-        className="absolute top-2 right-4 px-3 py-1 border-2 border-green-700 text-green-700 text-xs font-bold tracking-wider"
-        style={{
-          fontFamily: "'Special Elite', monospace",
           transform: 'rotate(3deg)',
-          opacity: 0.7,
         }}
       >
-        FIELD NOTES
+        <div
+          className="bg-white relative"
+          style={{
+            padding: '10px 10px 50px 10px', // Thick bottom for name
+            boxShadow: '3px 4px 12px rgba(0,0,0,0.25), 1px 1px 4px rgba(0,0,0,0.1)',
+          }}
+        >
+          {/* Small tape piece at top corner */}
+          <div
+            className="absolute -top-2 left-4 w-12 h-5 z-10"
+            style={{
+              background: 'rgba(255, 235, 200, 0.7)',
+              transform: 'rotate(-3deg)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+            }}
+          />
+
+          <img
+            src={src}
+            alt={name}
+            className="w-40 h-40 object-cover block"
+            style={{ filter: 'saturate(0.95) contrast(1.02)' }}
+          />
+
+          {/* Handwritten name at bottom */}
+          <p
+            className="absolute bottom-3 left-0 right-0 text-center text-stone-700"
+            style={{
+              fontFamily: "'Patrick Hand', cursive",
+              fontSize: '17px',
+            }}
+          >
+            {name}
+          </p>
+        </div>
       </div>
 
-      <p
-        className="text-stone-700 leading-[28px] relative z-10"
+      {/* Quote on sticky note - overlapping */}
+      <div
+        className="relative flex-1 sm:-ml-4 sm:mt-8"
         style={{
-          fontFamily: "'Patrick Hand', cursive",
-          fontSize: '17px',
+          transform: 'rotate(-1.5deg)',
         }}
       >
-        {text}
-      </p>
+        <div
+          className="p-4"
+          style={{
+            background: 'linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%)',
+            boxShadow: '2px 3px 6px rgba(0,0,0,0.15)',
+          }}
+        >
+          {/* Highlighter effect on quote - uneven, real looking */}
+          <p
+            className="text-stone-700 leading-relaxed relative"
+            style={{
+              fontFamily: "'Libre Baskerville', Georgia, serif",
+              fontSize: '15px',
+            }}
+          >
+            <span
+              style={{
+                background: `linear-gradient(
+                  104deg,
+                  rgba(255, 200, 0, 0) 0.9%,
+                  rgba(255, 200, 0, 0.4) 2.4%,
+                  rgba(255, 200, 0, 0.3) 5.8%,
+                  rgba(255, 200, 0, 0.25) 93%,
+                  rgba(255, 200, 0, 0.4) 96%,
+                  rgba(255, 200, 0, 0) 98%
+                )`,
+                padding: '0.1em 0.2em',
+                boxDecorationBreak: 'clone',
+                WebkitBoxDecorationBreak: 'clone',
+              }}
+            >
+              "{quote}"
+            </span>
+          </p>
+          {organization && (
+            <p
+              className="text-stone-500 text-xs mt-3"
+              style={{ fontFamily: "'Special Elite', monospace" }}
+            >
+              — {organization}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
-// Passport stamp for completion
-function PassportStamp({
+// Ink stamp with imperfect, textured look
+function InkStamp({
   country,
   flagColors,
   animate = false,
@@ -445,14 +537,38 @@ function PassportStamp({
   flagColors: string[];
   animate?: boolean;
 }) {
+  // Generate unique ID for this stamp's gradient
+  const gradientId = `flag-grad-${country.replace(/\s/g, '')}`;
+
   return (
     <div
       className={`relative ${animate ? 'animate-stamp-thud' : ''}`}
-      style={{ width: '120px', height: '120px' }}
+      style={{
+        width: '130px',
+        height: '130px',
+        transform: 'rotate(-4deg)',
+        // Ink texture - slight roughness
+        filter: 'contrast(1.1)',
+      }}
     >
-      <svg viewBox="0 0 120 120" className="w-full h-full">
+      {/* Slight double-stamp offset effect */}
+      <div
+        className="absolute inset-0"
+        style={{
+          transform: 'translate(1px, 1px)',
+          opacity: 0.15,
+        }}
+      >
+        <svg viewBox="0 0 130 130" className="w-full h-full">
+          <circle cx="65" cy="65" r="58" fill="none" stroke="#1E3A5F" strokeWidth="4" />
+          <circle cx="65" cy="65" r="48" fill="none" stroke="#1E3A5F" strokeWidth="2" />
+        </svg>
+      </div>
+
+      {/* Main stamp */}
+      <svg viewBox="0 0 130 130" className="w-full h-full relative">
         <defs>
-          <linearGradient id="flag-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={flagColors[0]} />
             <stop offset="33%" stopColor={flagColors[0]} />
             <stop offset="33%" stopColor={flagColors[1]} />
@@ -460,82 +576,86 @@ function PassportStamp({
             <stop offset="66%" stopColor={flagColors[2]} />
             <stop offset="100%" stopColor={flagColors[2]} />
           </linearGradient>
+
+          {/* Noise filter for ink texture */}
+          <filter id="inkTexture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
         </defs>
 
-        {/* Outer ring */}
-        <circle
-          cx="60"
-          cy="60"
-          r="54"
-          fill="none"
-          stroke="#1E3A5F"
-          strokeWidth="4"
-          opacity="0.8"
-        />
+        <g filter="url(#inkTexture)" opacity="0.88">
+          {/* Outer ring - slightly uneven */}
+          <circle
+            cx="65"
+            cy="65"
+            r="58"
+            fill="none"
+            stroke="#1E3A5F"
+            strokeWidth="5"
+          />
 
-        {/* Inner ring */}
-        <circle
-          cx="60"
-          cy="60"
-          r="44"
-          fill="none"
-          stroke="#1E3A5F"
-          strokeWidth="2"
-          opacity="0.6"
-        />
+          {/* Inner ring */}
+          <circle
+            cx="65"
+            cy="65"
+            r="48"
+            fill="none"
+            stroke="#1E3A5F"
+            strokeWidth="2.5"
+          />
 
-        {/* Country name curved at top */}
-        <path
-          id="topArc"
-          d="M 20 60 A 40 40 0 0 1 100 60"
-          fill="none"
-        />
-        <text
-          fill="#1E3A5F"
-          fontSize="11"
-          fontWeight="bold"
-          fontFamily="serif"
-          opacity="0.85"
-        >
-          <textPath href="#topArc" startOffset="50%" textAnchor="middle">
-            {country.toUpperCase()}
-          </textPath>
-        </text>
+          {/* Country name curved at top */}
+          <path
+            id="topArcStamp"
+            d="M 18 65 A 47 47 0 0 1 112 65"
+            fill="none"
+          />
+          <text
+            fill="#1E3A5F"
+            fontSize="12"
+            fontWeight="bold"
+            fontFamily="serif"
+          >
+            <textPath href="#topArcStamp" startOffset="50%" textAnchor="middle">
+              {country.toUpperCase()}
+            </textPath>
+          </text>
 
-        {/* Flag stripe in center */}
-        <rect
-          x="30"
-          y="50"
-          width="60"
-          height="20"
-          fill="url(#flag-grad)"
-          opacity="0.9"
-        />
+          {/* Flag stripe in center */}
+          <rect
+            x="30"
+            y="52"
+            width="70"
+            height="22"
+            fill={`url(#${gradientId})`}
+            opacity="0.9"
+          />
 
-        {/* Frog silhouette */}
-        <g transform="translate(48, 42)">
-          <ellipse cx="12" cy="8" rx="10" ry="6" fill="#1E3A5F" opacity="0.7" />
-          <circle cx="5" cy="4" r="3" fill="#1E3A5F" opacity="0.7" />
-          <circle cx="19" cy="4" r="3" fill="#1E3A5F" opacity="0.7" />
+          {/* Frog silhouette */}
+          <g transform="translate(50, 44)">
+            <ellipse cx="15" cy="10" rx="12" ry="7" fill="#1E3A5F" />
+            <circle cx="6" cy="5" r="4" fill="#1E3A5F" />
+            <circle cx="24" cy="5" r="4" fill="#1E3A5F" />
+          </g>
+
+          {/* "FIELD POST" at bottom */}
+          <path
+            id="bottomArcStamp"
+            d="M 18 65 A 47 47 0 0 0 112 65"
+            fill="none"
+          />
+          <text
+            fill="#1E3A5F"
+            fontSize="10"
+            fontFamily="serif"
+            letterSpacing="2"
+          >
+            <textPath href="#bottomArcStamp" startOffset="50%" textAnchor="middle">
+              FIELD POST • ASA
+            </textPath>
+          </text>
         </g>
-
-        {/* "FIELD POST" at bottom */}
-        <path
-          id="bottomArc"
-          d="M 20 60 A 40 40 0 0 0 100 60"
-          fill="none"
-        />
-        <text
-          fill="#1E3A5F"
-          fontSize="9"
-          fontFamily="serif"
-          letterSpacing="2"
-          opacity="0.7"
-        >
-          <textPath href="#bottomArc" startOffset="50%" textAnchor="middle">
-            FIELD POST • ASA
-          </textPath>
-        </text>
       </svg>
     </div>
   );
@@ -556,7 +676,6 @@ export function DispatchDetail() {
 
   useEffect(() => {
     if (dispatch && !isArticleComplete(dispatch.id)) {
-      // Delay stamp animation for dramatic effect
       const timer = setTimeout(() => {
         setShowStampAnimation(true);
         markArticleComplete(dispatch.id, 'dispatches');
@@ -603,15 +722,30 @@ export function DispatchDetail() {
   const basePath = `/images/dispatches/${dispatch.id}`;
 
   return (
-    <div className="min-h-screen pb-24 paper-kraft">
+    <div
+      className="min-h-screen pb-24"
+      style={{
+        // Kraft paper with more visible grain
+        backgroundColor: '#C9B896',
+        backgroundImage: `
+          url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"),
+          linear-gradient(180deg,
+            rgba(160, 140, 100, 0.2) 0%,
+            transparent 15%,
+            transparent 85%,
+            rgba(100, 80, 50, 0.15) 100%
+          )
+        `,
+        backgroundBlendMode: 'multiply, normal',
+      }}
+    >
       {/* ─────────────────────────────────────────────────────────────
-          HEADER - Like the top of an envelope
+          HEADER - Leather envelope top
           ───────────────────────────────────────────────────────────── */}
       <header className="relative texture-leather text-white">
-        {/* Airmail stripe at very top */}
         <div className="airmail-stripe" />
 
-        <div className="px-5 pt-6 pb-8">
+        <div className="px-5 pt-6 pb-8 relative">
           {/* Back button */}
           <button
             onClick={() => navigate('/dispatches')}
@@ -621,12 +755,12 @@ export function DispatchDetail() {
             ← ALL DISPATCHES
           </button>
 
-          {/* Title area - like a label stuck on */}
+          {/* Title label - stuck on like a shipping label */}
           <div
-            className="paper-parchment p-4 relative"
+            className="paper-parchment p-4 relative mr-28"
             style={{
-              transform: 'rotate(-0.5deg)',
-              boxShadow: '2px 3px 8px rgba(0,0,0,0.3)',
+              transform: 'rotate(-0.8deg)',
+              boxShadow: '3px 4px 10px rgba(0,0,0,0.35)',
             }}
           >
             <p
@@ -650,48 +784,51 @@ export function DispatchDetail() {
           </div>
 
           {/* Stamp in corner */}
-          <div className="absolute top-16 right-4">
-            <PassportStamp
+          <div className="absolute top-14 right-3">
+            <InkStamp
               country={dispatch.location.country}
               flagColors={dispatch.location.flagColors}
             />
           </div>
+
+          {/* MarshMellow peeking from corner */}
+          <div className="absolute -bottom-6 right-6 z-20">
+            <MarshMellow pose="reading" size="sm" />
+          </div>
         </div>
 
-        {/* Bottom airmail stripe */}
         <div className="airmail-stripe" />
       </header>
 
       {/* ─────────────────────────────────────────────────────────────
-          MAIN CONTENT - The journal pages
+          MAIN CONTENT - Journal pages
           ───────────────────────────────────────────────────────────── */}
-      <main className="py-8 space-y-8">
-        {/* Hero photo - taped to the page */}
+      <main className="pt-10 pb-8">
+        {/* Hero photo with photo corners */}
         {heroImage && (
-          <section className="px-4">
-            <TapedPhoto
+          <section className="px-4 mb-10">
+            <MountedPhoto
               src={`${basePath}/${heroImage.src}`}
               alt={dispatch.species.commonName}
               caption={heroImage.caption}
-              rotation={-1.5}
-              tapeColor="cream"
+              rotation={-2.5}
             />
           </section>
         )}
 
-        {/* Species info card */}
-        <section>
+        {/* Species specimen card */}
+        <section className="mb-10">
           <SpecimenCard dispatch={dispatch} />
         </section>
 
-        {/* Introduction text - handwritten feel */}
-        <section className="px-6">
+        {/* Introduction text */}
+        <section className="px-6 mb-10">
           <p
             className="text-stone-700 leading-relaxed"
             style={{
               fontFamily: "'Libre Baskerville', Georgia, serif",
               fontSize: '16px',
-              lineHeight: '1.8',
+              lineHeight: '1.85',
             }}
           >
             {dispatch.content.intro}
@@ -700,48 +837,46 @@ export function DispatchDetail() {
 
         {/* Detail photo if exists */}
         {detailImage && (
-          <section className="px-4">
-            <TapedPhoto
+          <section className="px-4 mb-10">
+            <MountedPhoto
               src={`${basePath}/${detailImage.src}`}
               alt={detailImage.caption || 'Detail photo'}
               caption={detailImage.caption}
-              rotation={1.5}
-              tapeColor="green"
+              rotation={2}
             />
           </section>
         )}
 
-        {/* Fun Facts - torn paper scraps */}
-        <section className="px-4">
+        {/* Amazing Facts - aged paper scraps with pushpins */}
+        <section className="px-4 mb-10">
           <h2
-            className="text-xl text-stone-800 mb-4 ml-2"
+            className="text-xl text-stone-800 mb-5 ml-2"
             style={{ fontFamily: "'Lilita One', cursive" }}
           >
             Amazing Facts
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {dispatch.content.facts.map((fact, index) => (
-              <FactScrap
+              <FactCard
                 key={index}
                 title={fact.title}
                 text={fact.text}
-                rotation={index % 2 === 0 ? -1 : 1.5}
-                variant={index}
+                index={index}
               />
             ))}
           </div>
         </section>
 
-        {/* Field Notes */}
-        <section>
-          <FieldNotePage text={dispatch.content.fieldNote} />
+        {/* Field Notes - proper notebook paper */}
+        <section className="mb-10">
+          <FieldNotesPage text={dispatch.content.fieldNote} />
         </section>
 
-        {/* Meet the Researcher */}
+        {/* Meet the Researcher - polaroid + sticky note */}
         {researcherImage && (
-          <section className="px-4">
+          <section className="px-5 mb-12">
             <h2
-              className="text-xl text-stone-800 mb-4"
+              className="text-xl text-stone-800 mb-5"
               style={{ fontFamily: "'Lilita One', cursive" }}
             >
               Meet the Researcher
@@ -755,18 +890,27 @@ export function DispatchDetail() {
           </section>
         )}
 
-        {/* Mission Complete - Stamp moment */}
-        <section className="px-4 mt-12">
+        {/* Mission Complete - with ink stamp */}
+        <section className="px-4 mt-14">
           <div
-            className="paper-parchment p-6 text-center relative overflow-hidden"
+            className="p-6 text-center relative"
             style={{
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              background: `
+                repeating-linear-gradient(
+                  transparent,
+                  transparent 27px,
+                  rgba(200, 190, 170, 0.3) 27px,
+                  rgba(200, 190, 170, 0.3) 28px
+                ),
+                linear-gradient(135deg, #f8f4eb 0%, #f5f0e4 100%)
+              `,
+              boxShadow: '0 4px 16px rgba(60, 40, 20, 0.2)',
             }}
           >
             {/* Decorative border */}
             <div
-              className="absolute inset-2 border-2 border-dashed border-amber-300 pointer-events-none"
-              style={{ borderRadius: '4px' }}
+              className="absolute inset-3 border-2 border-dashed pointer-events-none"
+              style={{ borderColor: '#C9B896' }}
             />
 
             <h3
@@ -776,13 +920,16 @@ export function DispatchDetail() {
               Mission Complete!
             </h3>
 
-            <p className="text-stone-600 mb-6" style={{ fontFamily: "'Nunito', sans-serif" }}>
+            <p
+              className="text-stone-600 mb-6"
+              style={{ fontFamily: "'Nunito', sans-serif" }}
+            >
               You've earned a new stamp for your passport
             </p>
 
             {/* Animated stamp */}
             <div className="flex justify-center mb-6">
-              <PassportStamp
+              <InkStamp
                 country={dispatch.location.country}
                 flagColors={dispatch.location.flagColors}
                 animate={showStampAnimation}
@@ -810,7 +957,7 @@ export function DispatchDetail() {
               </Link>
               <Link
                 to="/dispatches"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-sm transition-colors border-2 border-stone-300 text-stone-600 hover:border-stone-400 hover:text-stone-700"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-sm transition-colors border-2 border-stone-400 text-stone-600 hover:border-stone-500 hover:text-stone-700"
                 style={{ fontFamily: "'Nunito', sans-serif" }}
               >
                 More Dispatches →
@@ -819,13 +966,13 @@ export function DispatchDetail() {
           </div>
         </section>
 
-        {/* Photo credits - typewriter style */}
-        <footer className="px-6 text-center">
+        {/* Photo credits - typewriter style, small */}
+        <footer className="px-6 mt-8 text-center">
           <p
-            className="text-stone-400 text-xs"
+            className="text-stone-400 text-[11px] tracking-wide"
             style={{ fontFamily: "'Special Elite', monospace" }}
           >
-            Photos: {dispatch.photoCredits.join(' • ')}
+            PHOTOS: {dispatch.photoCredits.join(' • ')}
           </p>
         </footer>
       </main>
