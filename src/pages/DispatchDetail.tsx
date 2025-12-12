@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useProgress, useStamps } from '../hooks';
-import { ASALogo, IconChevronLeft, IconChevronRight, IconStatusDot, IconMapPin, IconCheck, IconAward } from '../components/ui';
+import { IconChevronLeft, IconChevronRight, IconStatusDot, IconMapPin, IconCheck, IconAward } from '../components/ui';
 import { MarshMellow } from '../components/MarshMellow';
 
 // Import dispatch data - we'll make this dynamic later
@@ -203,79 +203,65 @@ function Polaroid({
   src,
   caption,
   credit,
-  rotation = 0,
   className = ''
 }: {
   src: string;
   caption?: string;
   credit?: string;
-  rotation?: number;
   className?: string;
 }) {
   return (
-    <div
-      className={`bg-white p-2 pb-12 shadow-xl relative ${className}`}
-      style={{
-        transform: `rotate(${rotation}deg)`,
-        boxShadow: '0 4px 20px rgba(0,0,0,0.2), 0 8px 40px rgba(0,0,0,0.1)',
-      }}
-    >
-      <img
-        src={src}
-        alt={caption || ''}
-        className="w-full h-auto"
-      />
+    <div className={`${className}`}>
+      <div
+        className="bg-white p-2 shadow-xl rounded-sm"
+        style={{
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+        }}
+      >
+        <img
+          src={src}
+          alt={caption || ''}
+          className="w-full h-auto rounded-sm"
+        />
+      </div>
       {(caption || credit) && (
-        <div className="absolute bottom-2 left-2 right-2 text-center">
+        <div className="mt-2 text-center px-2">
           {caption && (
-            <p className="text-xs text-stone-600 leading-tight" style={{ fontFamily: '"Patrick Hand", cursive' }}>
+            <p className="text-sm text-stone-600 leading-snug italic" style={{ fontFamily: 'Georgia, serif' }}>
               {caption}
             </p>
           )}
           {credit && (
-            <p className="text-[10px] text-stone-400 mt-0.5">
+            <p className="text-xs text-stone-400 mt-1">
               Photo: {credit}
             </p>
           )}
         </div>
       )}
-      {/* Tape effect */}
-      <div
-        className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-6 opacity-60"
-        style={{
-          background: 'linear-gradient(180deg, rgba(255,235,180,0.9) 0%, rgba(240,220,160,0.8) 100%)',
-          transform: `translateX(-50%) rotate(${-rotation}deg)`,
-        }}
-      />
     </div>
   );
 }
 
-// Fact card component
+// Fact card component - adventure/nature colors
 function FactCard({ title, text, index }: { title: string; text: string; index: number }) {
-  const bgColors = [
-    'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', // Yellow
-    'linear-gradient(135deg, #DBEAFE 0%, #93C5FD 100%)', // Blue
-    'linear-gradient(135deg, #D1FAE5 0%, #6EE7B7 100%)', // Green
+  // Earthy, adventure-themed colors
+  const cardStyles = [
+    { bg: 'linear-gradient(135deg, #FDF8F3 0%, #F5E6D3 100%)', border: '#D4A574' }, // Parchment/tan
+    { bg: 'linear-gradient(135deg, #F0F7F4 0%, #D4E6DC 100%)', border: '#7AC143' }, // Sage green
+    { bg: 'linear-gradient(135deg, #FEF9E7 0%, #F7ECD0 100%)', border: '#D4AF37' }, // Gold/wheat
   ];
+  const style = cardStyles[index % cardStyles.length];
 
   return (
     <div
-      className="rounded-xl p-4 shadow-lg relative overflow-hidden"
+      className="rounded-xl p-4 shadow-md relative overflow-hidden border-l-4"
       style={{
-        background: bgColors[index % bgColors.length],
-        boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+        background: style.bg,
+        borderLeftColor: style.border,
+        boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
       }}
     >
-      {/* Pin/tack effect */}
-      <div
-        className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full shadow-md"
-        style={{
-          background: 'radial-gradient(circle at 30% 30%, #C41E3A 0%, #8B0000 100%)',
-        }}
-      />
-
-      <h4 className="font-bold text-stone-800 text-sm mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+      <h4 className="font-bold text-stone-800 text-base mb-2" style={{ fontFamily: 'Georgia, serif' }}>
         {title}
       </h4>
       <p className="text-sm text-stone-600 leading-relaxed">
@@ -386,13 +372,12 @@ export function DispatchDetail() {
       <main className="px-5 py-6 -mt-1">
         {/* Hero photo - Polaroid style */}
         {heroImage && (
-          <div className="flex justify-center mb-8 -mt-2">
+          <div className="flex justify-center mb-8">
             <Polaroid
               src={`${basePath}/${heroImage.src}`}
               caption={heroImage.caption}
               credit={heroImage.credit}
-              rotation={-2}
-              className="max-w-sm w-full"
+              className="max-w-md w-full"
             />
           </div>
         )}
@@ -403,10 +388,10 @@ export function DispatchDetail() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
         }}>
           {/* Field card header */}
-          <div className="px-4 py-3 flex items-center gap-3" style={{
+          <div className="px-4 py-3 flex items-center gap-2" style={{
             background: 'linear-gradient(90deg, #7AC143 0%, #5A9A2F 100%)',
           }}>
-            <ASALogo variant="icon" className="w-5 h-5" color="white" />
+            <span className="text-xl">🐸</span>
             <span className="text-white font-bold text-sm tracking-wide uppercase">Field Card</span>
           </div>
 
@@ -467,8 +452,7 @@ export function DispatchDetail() {
               src={`${basePath}/${detailImage.src}`}
               caption={detailImage.caption}
               credit={detailImage.credit}
-              rotation={1.5}
-              className="max-w-xs w-full"
+              className="max-w-sm w-full"
             />
           </div>
         )}
@@ -491,15 +475,14 @@ export function DispatchDetail() {
             <h2 className="text-xl text-stone-800 mb-4 flex items-center gap-2" style={{ fontFamily: 'Georgia, serif' }}>
               <span className="text-2xl">📸</span> From the Field
             </h2>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {fieldImages.map((img, index) => (
                 <Polaroid
                   key={index}
                   src={`${basePath}/${img.src}`}
                   caption={img.caption}
                   credit={img.credit}
-                  rotation={(index % 2 === 0 ? -1 : 1) * (2 + index)}
-                  className="max-w-xs w-full"
+                  className="w-full"
                 />
               ))}
             </div>
@@ -508,17 +491,21 @@ export function DispatchDetail() {
 
         {/* Conservation Note */}
         <section className="mb-8">
-          <div className="rounded-xl p-5 relative overflow-hidden" style={{
-            background: 'linear-gradient(135deg, #2C1810 0%, #3D2317 100%)',
+          <div className="rounded-xl p-5 relative overflow-hidden border border-amber-200" style={{
+            background: 'linear-gradient(135deg, #FDF8F3 0%, #F5E6D3 100%)',
           }}>
-            <div className="absolute top-4 right-4 opacity-10">
-              <MarshMellow pose="thinking" size="md" />
+            {/* Decorative leaf/nature corner */}
+            <div className="absolute top-3 right-3 text-3xl opacity-20">
+              🌿
             </div>
 
-            <p className="text-amber-400/60 text-xs tracking-[0.15em] uppercase mb-2">
-              Field Note
-            </p>
-            <p className="text-amber-100 leading-relaxed relative z-10" style={{ fontFamily: 'Georgia, serif' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">📋</span>
+              <p className="text-amber-800 text-xs font-bold tracking-[0.15em] uppercase">
+                Field Note
+              </p>
+            </div>
+            <p className="text-stone-700 leading-relaxed relative z-10" style={{ fontFamily: 'Georgia, serif' }}>
               {dispatch.content.fieldNote}
             </p>
           </div>
